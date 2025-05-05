@@ -86,8 +86,6 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
         private void TB_PHONE_KeyDown(object sender, KeyEventArgs e)
         {
-            TextBox tb = sender as TextBox;
-
             if (e.KeyCode == Keys.Back)
             {
                 if (digits.Length > 0)
@@ -96,10 +94,10 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
                     string formatted = FormatPhoneNumber();
 
-                    tb.TextChanged -= TB_PHONE_TextChanged;
-                    tb.Text = formatted;
-                    tb.SelectionStart = tb.Text.Length;
-                    tb.TextChanged += TB_PHONE_TextChanged;
+                    TB_PHONE.TextChanged -= TB_PHONE_TextChanged;
+                    TB_PHONE.Text = formatted;
+                    TB_PHONE.SelectionStart = TB_PHONE.Text.Length;
+                    TB_PHONE.TextChanged += TB_PHONE_TextChanged;
                 }
 
                 e.SuppressKeyPress = true;
@@ -108,9 +106,7 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
         private void TB_PHONE_TextChanged(object sender, EventArgs e)
         {
-            TextBox tb = sender as TextBox;
-
-            string currentDigits = System.Text.RegularExpressions.Regex.Replace(tb.Text, @"\D", "");
+            string currentDigits = System.Text.RegularExpressions.Regex.Replace(TB_PHONE.Text, @"\D", "");
             if (currentDigits.Length > digits.Length)
             {
                 string added = currentDigits.Substring(digits.Length);
@@ -122,10 +118,10 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
             string formatted = FormatPhoneNumber();
 
-            tb.TextChanged -= TB_PHONE_TextChanged;
-            tb.Text = formatted;
-            tb.SelectionStart = tb.Text.Length;
-            tb.TextChanged += TB_PHONE_TextChanged;
+            TB_PHONE.TextChanged -= TB_PHONE_TextChanged;
+            TB_PHONE.Text = formatted;
+            TB_PHONE.SelectionStart = TB_PHONE.Text.Length;
+            TB_PHONE.TextChanged += TB_PHONE_TextChanged;
         }
 
         private string FormatPhoneNumber()

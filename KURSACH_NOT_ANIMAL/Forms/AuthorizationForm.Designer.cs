@@ -91,7 +91,7 @@
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = SystemColors.ControlLight;
             panel1.Controls.Add(label1);
             panel1.Controls.Add(LINK_REGISTRATION);

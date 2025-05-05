@@ -150,7 +150,7 @@
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = SystemColors.ControlLight;
             panel1.Controls.Add(DATE_PICKER_BIRTHDAY);
             panel1.Controls.Add(textBox1);

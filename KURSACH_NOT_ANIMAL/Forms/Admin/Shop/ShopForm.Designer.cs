@@ -28,103 +28,116 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             TB_NAME = new TextBox();
             TB_ADRESS = new TextBox();
-            label2 = new Label();
             CMB_CITY = new ComboBox();
-            label3 = new Label();
             BTN_ACTION = new Button();
+            label3 = new Label();
+            panel1 = new Panel();
+            label1 = new Label();
+            panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(96, 123);
-            label1.Name = "label1";
-            label1.Size = new Size(39, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Имя";
             // 
             // TB_NAME
             // 
-            TB_NAME.Location = new Point(160, 122);
+            TB_NAME.Location = new Point(43, 101);
+            TB_NAME.Margin = new Padding(4);
             TB_NAME.Name = "TB_NAME";
-            TB_NAME.Size = new Size(208, 27);
+            TB_NAME.PlaceholderText = "Имя";
+            TB_NAME.Size = new Size(259, 31);
             TB_NAME.TabIndex = 1;
             // 
             // TB_ADRESS
             // 
-            TB_ADRESS.Location = new Point(160, 174);
+            TB_ADRESS.Location = new Point(43, 236);
+            TB_ADRESS.Margin = new Padding(4);
             TB_ADRESS.Multiline = true;
             TB_ADRESS.Name = "TB_ADRESS";
-            TB_ADRESS.Size = new Size(208, 71);
+            TB_ADRESS.PlaceholderText = "Адрес";
+            TB_ADRESS.Size = new Size(259, 88);
             TB_ADRESS.TabIndex = 2;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(96, 177);
-            label2.Name = "label2";
-            label2.Size = new Size(51, 20);
-            label2.TabIndex = 3;
-            label2.Text = "Адрес";
             // 
             // CMB_CITY
             // 
             CMB_CITY.FormattingEnabled = true;
-            CMB_CITY.Location = new Point(535, 122);
+            CMB_CITY.Location = new Point(43, 183);
+            CMB_CITY.Margin = new Padding(4);
             CMB_CITY.Name = "CMB_CITY";
-            CMB_CITY.Size = new Size(151, 28);
+            CMB_CITY.Size = new Size(259, 33);
             CMB_CITY.TabIndex = 4;
+            // 
+            // BTN_ACTION
+            // 
+            BTN_ACTION.BackColor = SystemColors.ActiveBorder;
+            BTN_ACTION.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            BTN_ACTION.Location = new Point(43, 363);
+            BTN_ACTION.Margin = new Padding(4);
+            BTN_ACTION.Name = "BTN_ACTION";
+            BTN_ACTION.Size = new Size(259, 61);
+            BTN_ACTION.TabIndex = 7;
+            BTN_ACTION.Text = "Изменить/Добавить";
+            BTN_ACTION.UseVisualStyleBackColor = false;
+            BTN_ACTION.Click += BTN_ACTION_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(456, 125);
+            label3.Location = new Point(43, 154);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(51, 20);
+            label3.Size = new Size(63, 25);
             label3.TabIndex = 5;
             label3.Text = "Город";
             // 
-            // BTN_ACTION
+            // panel1
             // 
-            BTN_ACTION.Location = new Point(317, 332);
-            BTN_ACTION.Name = "BTN_ACTION";
-            BTN_ACTION.Size = new Size(160, 49);
-            BTN_ACTION.TabIndex = 7;
-            BTN_ACTION.Text = "Добавить/Изменить";
-            BTN_ACTION.UseVisualStyleBackColor = true;
-            BTN_ACTION.Click += BTN_ACTION_Click;
+            panel1.Anchor = AnchorStyles.None;
+            panel1.BackColor = SystemColors.ControlLight;
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(TB_ADRESS);
+            panel1.Controls.Add(BTN_ACTION);
+            panel1.Controls.Add(TB_NAME);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(CMB_CITY);
+            panel1.Location = new Point(311, 48);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(347, 461);
+            panel1.TabIndex = 8;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 22F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label1.Location = new Point(71, 21);
+            label1.Name = "label1";
+            label1.Size = new Size(197, 60);
+            label1.TabIndex = 8;
+            label1.Text = "Магазин";
             // 
             // ShopForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(BTN_ACTION);
-            Controls.Add(label3);
-            Controls.Add(CMB_CITY);
-            Controls.Add(label2);
-            Controls.Add(TB_ADRESS);
-            Controls.Add(TB_NAME);
-            Controls.Add(label1);
+            ClientSize = new Size(978, 544);
+            Controls.Add(panel1);
+            Margin = new Padding(4);
+            MinimumSize = new Size(1000, 600);
             Name = "ShopForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Магазин";
             Load += ShopForm_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
         private TextBox TB_NAME;
         private TextBox TB_ADRESS;
-        private Label label2;
         private ComboBox CMB_CITY;
-        private Label label3;
         private Button BTN_ACTION;
+        private Label label3;
+        private Panel panel1;
+        private Label label1;
     }
 }
