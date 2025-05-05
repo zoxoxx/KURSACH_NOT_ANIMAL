@@ -16,6 +16,7 @@ namespace KURSACH_NOT_ANIMAL.Forms
     public partial class RegistrationForm : Form
     {
         internal UserSystem? NewUser { get; set; } = null;
+        string digits = "";
         public RegistrationForm()
         {
             InitializeComponent();
@@ -63,7 +64,7 @@ namespace KURSACH_NOT_ANIMAL.Forms
                 return;
             }
 
-            if (TB_PHONE.Text.Length > 11 || TB_PHONE.Text.Length < 11)
+            if (digits.Length > 11 || digits.Length < 11)
             {
                 MessageBox.Show("Длина номера мобильного телефона должна составлять 11 знаков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -75,15 +76,87 @@ namespace KURSACH_NOT_ANIMAL.Forms
                 return;
             }
 
-            int result = UserFromDb.AddUser(TB_LOGIN.Text, TB_PASSWORD.Text, DateOnly.FromDateTime(DATE_PICKER_BIRTHDAY.Value), TB_PHONE.Text,
+            int result = UserFromDb.AddUser(TB_LOGIN.Text, TB_PASSWORD.Text, DateOnly.FromDateTime(DATE_PICKER_BIRTHDAY.Value), digits,
                 (TB_LASTNAME.Text.Trim() + " " + TB_NAME.Text.Trim() +
                 (string.IsNullOrWhiteSpace(TB_PATRONYMIC.Text) ? "" : " " + TB_PATRONYMIC.Text.Trim())).Trim());
 
             if (result == 1)
                 NewUser = new UserSystem(TB_LASTNAME.Text.Trim() + " " + TB_NAME.Text.Trim() + (string.IsNullOrEmpty(TB_PATRONYMIC.Text.Trim()) ? "" : " " + TB_PATRONYMIC.Text.Trim()),
-                    DateOnly.FromDateTime(DATE_PICKER_BIRTHDAY.Value), TB_PHONE.Text, 0, TB_LOGIN.Text, TB_PASSWORD.Text);
+                    DateOnly.FromDateTime(DATE_PICKER_BIRTHDAY.Value), digits, 0, TB_LOGIN.Text, TB_PASSWORD.Text);
 
             this.Close();
+        }
+
+        private void TB_PHONE_KeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+
+            if (e.KeyCode == Keys.Back)
+            {
+                if (digits.Length > 0)
+                {
+                    digits = digits.Substring(0, digits.Length - 1);
+
+                    string formatted = FormatPhoneNumber();
+
+                    tb.TextChanged -= TB_PHONE_TextChanged;
+                    tb.Text = formatted;
+                    tb.SelectionStart = tb.Text.Length;
+                    tb.TextChanged += TB_PHONE_TextChanged;
+                }
+
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void TB_PHONE_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+
+            string currentDigits = System.Text.RegularExpressions.Regex.Replace(tb.Text, @"\D", "");
+            if (currentDigits.Length > digits.Length)
+            {
+                string added = currentDigits.Substring(digits.Length);
+                digits += System.Text.RegularExpressions.Regex.Replace(added, @"\D", "");
+            }
+
+            if (digits.Length > 11)
+                digits = digits.Substring(0, 11);
+
+            string formatted = FormatPhoneNumber();
+
+            tb.TextChanged -= TB_PHONE_TextChanged;
+            tb.Text = formatted;
+            tb.SelectionStart = tb.Text.Length;
+            tb.TextChanged += TB_PHONE_TextChanged;
+        }
+
+        private string FormatPhoneNumber()
+        {
+            if (string.IsNullOrEmpty(digits))
+                return "";
+
+            if (digits.StartsWith("8"))
+                digits = "7" + digits.Substring(1);
+            else if (!digits.StartsWith("7"))
+                digits = "7" + digits;
+
+            string formatted = "+";
+
+            for (int i = 0; i < digits.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0: formatted += digits[i] + " "; break;
+                    case 1: formatted += "(" + digits[i]; break;
+                    case 3: formatted += digits[i] + ") "; break;
+                    case 6: formatted += digits[i] + "-"; break;
+                    case 8: formatted += digits[i] + "-"; break;
+                    default: formatted += digits[i]; break;
+                }
+            }
+
+            return formatted;
         }
     }
 }

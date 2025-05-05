@@ -6,7 +6,7 @@ namespace KURSACH_NOT_ANIMAL
 {
     internal static class Program
     {
-        internal static ShopReestr StartForm { get; set; } = new ShopReestr(flagPartner: true);
+        internal static AuthorizationForm StartForm { get; set; } = new AuthorizationForm();
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
