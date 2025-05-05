@@ -30,6 +30,7 @@
         {
             BTN_ADD = new Button();
             DG_SKLAD = new DataGridView();
+            BTN_DELETE = new Button();
             SkladId = new DataGridViewTextBoxColumn();
             ProductName = new DataGridViewTextBoxColumn();
             ProductCount = new DataGridViewTextBoxColumn();
@@ -37,7 +38,6 @@
             PartnerName = new DataGridViewTextBoxColumn();
             PurchasePrice = new DataGridViewTextBoxColumn();
             DatePrihod = new DataGridViewTextBoxColumn();
-            BTN_DELETE = new Button();
             ((System.ComponentModel.ISupportInitialize)DG_SKLAD).BeginInit();
             SuspendLayout();
             // 
@@ -54,67 +54,22 @@
             BTN_ADD.Text = "Добавить";
             BTN_ADD.TextImageRelation = TextImageRelation.TextBeforeImage;
             BTN_ADD.UseVisualStyleBackColor = true;
+            BTN_ADD.Click += BTN_ADD_Click;
             // 
             // DG_SKLAD
             // 
+            DG_SKLAD.AllowUserToAddRows = false;
+            DG_SKLAD.AllowUserToDeleteRows = false;
             DG_SKLAD.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DG_SKLAD.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_SKLAD.Columns.AddRange(new DataGridViewColumn[] { SkladId, ProductName, ProductCount, ShopName, PartnerName, PurchasePrice, DatePrihod });
             DG_SKLAD.Location = new Point(12, 51);
             DG_SKLAD.Name = "DG_SKLAD";
+            DG_SKLAD.ReadOnly = true;
             DG_SKLAD.RowHeadersWidth = 51;
             DG_SKLAD.Size = new Size(776, 390);
             DG_SKLAD.TabIndex = 4;
-            // 
-            // SkladId
-            // 
-            SkladId.HeaderText = "Первичный ключ закупки";
-            SkladId.MinimumWidth = 6;
-            SkladId.Name = "SkladId";
-            SkladId.Visible = false;
-            SkladId.Width = 125;
-            // 
-            // ProductName
-            // 
-            ProductName.HeaderText = "Товар";
-            ProductName.MinimumWidth = 6;
-            ProductName.Name = "ProductName";
-            ProductName.Width = 150;
-            // 
-            // ProductCount
-            // 
-            ProductCount.HeaderText = "Количество";
-            ProductCount.MinimumWidth = 6;
-            ProductCount.Name = "ProductCount";
-            ProductCount.Width = 125;
-            // 
-            // ShopName
-            // 
-            ShopName.HeaderText = "Магазин";
-            ShopName.MinimumWidth = 6;
-            ShopName.Name = "ShopName";
-            ShopName.Width = 125;
-            // 
-            // PartnerName
-            // 
-            PartnerName.HeaderText = "Партнер";
-            PartnerName.MinimumWidth = 6;
-            PartnerName.Name = "PartnerName";
-            PartnerName.Width = 125;
-            // 
-            // PurchasePrice
-            // 
-            PurchasePrice.HeaderText = "Цена закупки";
-            PurchasePrice.MinimumWidth = 6;
-            PurchasePrice.Name = "PurchasePrice";
-            PurchasePrice.Width = 75;
-            // 
-            // DatePrihod
-            // 
-            DatePrihod.HeaderText = "Дата";
-            DatePrihod.MinimumWidth = 6;
-            DatePrihod.Name = "DatePrihod";
-            DatePrihod.Width = 75;
+            DG_SKLAD.CellContentDoubleClick += DG_SKLAD_CellContentDoubleClick;
             // 
             // BTN_DELETE
             // 
@@ -129,6 +84,63 @@
             BTN_DELETE.Text = "Удалить";
             BTN_DELETE.TextImageRelation = TextImageRelation.TextBeforeImage;
             BTN_DELETE.UseVisualStyleBackColor = true;
+            BTN_DELETE.Click += BTN_DELETE_Click;
+            // 
+            // SkladId
+            // 
+            SkladId.HeaderText = "Первичный ключ закупки";
+            SkladId.MinimumWidth = 6;
+            SkladId.Name = "SkladId";
+            SkladId.ReadOnly = true;
+            SkladId.Visible = false;
+            SkladId.Width = 125;
+            // 
+            // ProductName
+            // 
+            ProductName.HeaderText = "Товар";
+            ProductName.MinimumWidth = 6;
+            ProductName.Name = "ProductName";
+            ProductName.ReadOnly = true;
+            ProductName.Width = 150;
+            // 
+            // ProductCount
+            // 
+            ProductCount.HeaderText = "Количество";
+            ProductCount.MinimumWidth = 6;
+            ProductCount.Name = "ProductCount";
+            ProductCount.ReadOnly = true;
+            ProductCount.Width = 125;
+            // 
+            // ShopName
+            // 
+            ShopName.HeaderText = "Магазин";
+            ShopName.MinimumWidth = 6;
+            ShopName.Name = "ShopName";
+            ShopName.ReadOnly = true;
+            ShopName.Width = 125;
+            // 
+            // PartnerName
+            // 
+            PartnerName.HeaderText = "Партнер";
+            PartnerName.MinimumWidth = 6;
+            PartnerName.Name = "PartnerName";
+            PartnerName.ReadOnly = true;
+            PartnerName.Width = 125;
+            // 
+            // PurchasePrice
+            // 
+            PurchasePrice.HeaderText = "Цена закупки";
+            PurchasePrice.MinimumWidth = 6;
+            PurchasePrice.Name = "PurchasePrice";
+            PurchasePrice.ReadOnly = true;
+            PurchasePrice.Width = 75;
+            // 
+            // DatePrihod
+            // 
+            DatePrihod.HeaderText = "Дата";
+            DatePrihod.MinimumWidth = 6;
+            DatePrihod.Name = "DatePrihod";
+            DatePrihod.ReadOnly = true;
             // 
             // SkladReestr
             // 
@@ -151,7 +163,7 @@
         private DataGridView DG_SKLAD;
         private Button BTN_DELETE;
         private DataGridViewTextBoxColumn SkladId;
-        private DataGridViewTextBoxColumn ProductName;
+        private new DataGridViewTextBoxColumn ProductName;
         private DataGridViewTextBoxColumn ProductCount;
         private DataGridViewTextBoxColumn ShopName;
         private DataGridViewTextBoxColumn PartnerName;
