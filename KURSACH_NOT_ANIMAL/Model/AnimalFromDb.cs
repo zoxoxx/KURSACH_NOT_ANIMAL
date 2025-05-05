@@ -6,6 +6,7 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
@@ -334,9 +335,14 @@ namespace KURSACH_NOT_ANIMAL.Model
             }
             catch(NpgsqlException ex)
             {
-                Debug.WriteLine(ex.Message);
-                MessageBox.Show("Было вызвано исключение при удалении категории животных,\n" +
+                if (ex.ErrorCode == -2147467259)
+                    MessageBox.Show("Данную категорию нельзя удалить, так как имеются животные с этой категорией", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    Debug.WriteLine(ex.Message);
+                    MessageBox.Show("Было вызвано исключение при удалении категории животных,\n" +
                     "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
                 return false;
             }

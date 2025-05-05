@@ -1,13 +1,15 @@
+using KURSACH_NOT_ANIMAL.Classes.DbClasses;
 using KURSACH_NOT_ANIMAL.Forms.Admin;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Shop;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Sklad;
+using KURSACH_NOT_ANIMAL.Forms.Animal;
 using KURSACH_NOT_ANIMAL.Forms.Reestr;
 
 namespace KURSACH_NOT_ANIMAL
 {
     internal static class Program
     {
-        internal static AuthorizationForm StartForm { get; set; } = new AuthorizationForm();
+        internal static AnimalReestr StartForm { get; set; } = new AnimalReestr();
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

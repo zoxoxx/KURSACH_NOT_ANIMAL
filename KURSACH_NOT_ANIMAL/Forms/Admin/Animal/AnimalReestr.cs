@@ -165,7 +165,10 @@ namespace KURSACH_NOT_ANIMAL.Forms.Reestr
                 return;
 
             if (DG_ANIMALS.Columns[e.ColumnIndex] is DataGridViewComboBoxColumn)
+            { 
                 ComboBoxHandler(e);
+                return;
+            }
 
             if (DG_ANIMALS.Rows.Count <= 0)
                 return;

@@ -26,7 +26,9 @@ namespace KURSACH_NOT_ANIMAL.Forms.Animal
 
             DG_CATEGORIES.Columns[0].DataPropertyName = "Id";
             DG_CATEGORIES.Columns[1].DataPropertyName = "Name";
-            DG_CATEGORIES.Columns[2].DataPropertyName = "Desciption";
+            DG_CATEGORIES.Columns[2].DataPropertyName = "Description";
+
+            DG_CATEGORIES.AutoGenerateColumns = false;
         }
 
         private void CategoryAnimalReestr_Load(object sender, EventArgs e)
