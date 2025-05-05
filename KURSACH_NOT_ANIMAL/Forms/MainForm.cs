@@ -70,5 +70,13 @@ namespace KURSACH_NOT_ANIMAL.Forms
             shopReestr.ShowDialog();
             this.Show();
         }
+
+        private void MENU_ITEM_SKLAD_Click(object sender, EventArgs e)
+        {
+            SkladReestr skladReestr = new SkladReestr();
+            this.Hide();
+            skladReestr.ShowDialog();
+            this.Show();
+        }
     }
 }
