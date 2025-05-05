@@ -15,17 +15,17 @@ namespace KURSACH_NOT_ANIMAL.Forms.Animal
 {
     public partial class CategoryAnimalForm : Form
     {
-        int? categoryId;
+        string? categoryName;
         bool? flagDelete;
         bool? flagInsert;
         bool? flagUpdate;
         CategoryAnimal? categoryAnimal;
-        public CategoryAnimalForm(int? categoryId = null, bool? flagDelete = null, bool? flagInsert = null, bool? flagUpdate = null)
+        public CategoryAnimalForm(string? categoryName = null, bool? flagDelete = null, bool? flagInsert = null, bool? flagUpdate = null)
         {
-            if (categoryId != null)
-                categoryAnimal = AnimalFromDb.GetCategory((int)categoryId);
+            if (categoryName != null)
+                categoryAnimal = AnimalFromDb.GetCategory(categoryName);
 
-            this.categoryId = categoryId;
+            this.categoryName = categoryName;
             this.flagDelete = flagDelete;
             this.flagInsert = flagInsert;
             this.flagUpdate = flagUpdate;

@@ -127,12 +127,14 @@ namespace KURSACH_NOT_ANIMAL.Model
                     string sqlExp = "update ANIMAL " +
                         "set " +
                         "   NAME = @Name, " +
-                        "   CATEGORY_ID = @CategoryId " +
+                        "   CATEGORY_ID = @CategoryId," +
+                        "   DESCRIPTION = @Description " +
                         "where ID = @Id";
                     NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
                     cmd.Parameters.AddWithValue("Id", changedAnimal.Id);
                     cmd.Parameters.AddWithValue("Name", changedAnimal.Name);
                     cmd.Parameters.AddWithValue("CategoryId", changedAnimal.CategoryId);
+                    cmd.Parameters.AddWithValue("Description", changedAnimal.Description);
 
                     int resultQery = cmd.ExecuteNonQuery();
                 }
@@ -149,7 +151,7 @@ namespace KURSACH_NOT_ANIMAL.Model
             return true;
         }
 
-        public static CategoryAnimal? GetCategory(int categoryId)
+        public static CategoryAnimal? GetCategory(string categoryName)
         {
             CategoryAnimal? selectedCategory = null;
 
@@ -161,9 +163,9 @@ namespace KURSACH_NOT_ANIMAL.Model
 
                     string sqlExp = "select * " +
                         "from CATEGORY_ANIMAL " +
-                        "where ID = @Id";
+                        "where NAME = @Name";
                     NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
-                    cmd.Parameters.AddWithValue("Id", categoryId);
+                    cmd.Parameters.AddWithValue("Name", categoryName);
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
@@ -250,6 +252,37 @@ namespace KURSACH_NOT_ANIMAL.Model
             return true;
         }
 
+        public static int GetMaxAnimalId()
+        {
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionStr.connectionString))
+                {
+                    connection.Open();
+
+                    string sqlExp = "select max(ID) " +
+                        "from ANIMAL";
+                    NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
+
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (!reader.HasRows)
+                        return 0;
+
+                    reader.Read();
+                    return (int)reader[0];
+                }
+            }
+            catch(NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show("Было вызвано исключение при получении максимального значения первичного ключа животного,\n" +
+                    "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return 0;
+            }
+        }
+
         public static bool UpdateCategory(CategoryAnimal changedCategory)
         {
             try
@@ -332,8 +365,8 @@ namespace KURSACH_NOT_ANIMAL.Model
                         return null;
 
                     while (reader.Read())
-                        animals.Add(new AnimalView((int)reader[0], reader[2].ToString()!,
-                            reader[3].ToString()!, reader[4].ToString()?? "Пусто", reader[5].ToString()?? "", (int)reader[6]));
+                        animals.Add(new AnimalView((int)reader[0], reader[1].ToString()!,
+                            reader[2].ToString()!, reader[3].ToString()?? "Пусто", reader[4].ToString()?? "", (int)reader[5]));
                 }
             }
             catch(NpgsqlException ex)

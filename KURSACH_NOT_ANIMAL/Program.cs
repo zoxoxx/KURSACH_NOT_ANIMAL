@@ -1,10 +1,11 @@
+using KURSACH_NOT_ANIMAL.Forms.Admin;
 using KURSACH_NOT_ANIMAL.Forms.Reestr;
 
 namespace KURSACH_NOT_ANIMAL
 {
     internal static class Program
     {
-        internal static AnimalReestr StartForm { get; set; } = new AnimalReestr();
+        internal static UserReestr StartForm { get; set; } = new UserReestr();
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

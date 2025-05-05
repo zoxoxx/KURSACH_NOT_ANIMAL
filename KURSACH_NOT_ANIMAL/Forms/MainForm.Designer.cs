@@ -65,6 +65,7 @@
             MENU_ITEM_USERS.Name = "MENU_ITEM_USERS";
             MENU_ITEM_USERS.Size = new Size(224, 26);
             MENU_ITEM_USERS.Text = "Пользователи";
+            MENU_ITEM_USERS.Click += MENU_ITEM_USERS_Click;
             // 
             // MENU_ITEM_PRODUCTS
             // 
@@ -107,13 +108,13 @@
             // MENU_ITEM_SKLAD
             // 
             MENU_ITEM_SKLAD.Name = "MENU_ITEM_SKLAD";
-            MENU_ITEM_SKLAD.Size = new Size(157, 26);
+            MENU_ITEM_SKLAD.Size = new Size(224, 26);
             MENU_ITEM_SKLAD.Text = "Закупки";
             // 
             // MENU_ITEM_OPERATIONS
             // 
             MENU_ITEM_OPERATIONS.Name = "MENU_ITEM_OPERATIONS";
-            MENU_ITEM_OPERATIONS.Size = new Size(157, 26);
+            MENU_ITEM_OPERATIONS.Size = new Size(224, 26);
             MENU_ITEM_OPERATIONS.Text = "Продажи";
             // 
             // MENU_PROFILE

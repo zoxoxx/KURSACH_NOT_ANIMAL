@@ -33,6 +33,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Reestr
 
             DG_ANIMALS.AllowUserToAddRows = false;
             DG_ANIMALS.EditMode = DataGridViewEditMode.EditOnEnter;
+            DG_ANIMALS.AutoGenerateColumns = false;
         }
 
         private void AnimalReestr_Load(object sender, EventArgs e)
@@ -63,7 +64,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Reestr
 
             columnCategory.DataSource = categories;
             columnCategory.DisplayMember = "Name";
-            columnCategory.ValueMember = "Id";
+            columnCategory.ValueMember = "Name";
         }
 
         private void BTN_ADD_Click(object sender, EventArgs e)
@@ -71,7 +72,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Reestr
             DataGridViewRow? emptyRow = null;
             foreach (DataGridViewRow row in DG_ANIMALS.Rows)
             {
-                object cellVal = row.Cells[1].Value;
+                object cellVal = row.Cells[0].Value;
                 if ((cellVal == null || string.IsNullOrWhiteSpace(cellVal.ToString()))
                     && row.Visible && DG_ANIMALS.Columns[1].Visible)
                 {
@@ -91,6 +92,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Reestr
                     animals = new List<AnimalView>();
 
                 animals.Add(new AnimalView(0));
+                DG_ANIMALS.DataSource = null;
                 DG_ANIMALS.DataSource = animals;
 
                 int rowIndex = DG_ANIMALS.Rows.Count - 1; 
@@ -165,47 +167,42 @@ namespace KURSACH_NOT_ANIMAL.Forms.Reestr
             if (DG_ANIMALS.Columns[e.ColumnIndex] is DataGridViewComboBoxColumn)
                 ComboBoxHandler(e);
 
+            if (DG_ANIMALS.Rows.Count <= 0)
+                return;
+
             AnimalView? selectedAnimal = DG_ANIMALS.Rows[e.RowIndex].DataBoundItem as AnimalView;
             if (selectedAnimal is null)
                 return;
 
+            if (selectedAnimal.AnimalId == 0 && selectedAnimal.CategoryId != 0 &&
+                selectedAnimal.CategoryId != null && !string.IsNullOrWhiteSpace(selectedAnimal.Name))
+            {
+                AnimalFromDb.AddAnimal(selectedAnimal.Name, (int)selectedAnimal.CategoryId, selectedAnimal.Description ?? "");
 
+                if (animals is null)
+                    animals = new List<AnimalView>();
+
+                animals[e.RowIndex].AnimalId = AnimalFromDb.GetMaxAnimalId();
+                DG_ANIMALS.DataSource = animals;
+                return;
+            }
+
+            if (selectedAnimal.CategoryId != null && !string.IsNullOrWhiteSpace(selectedAnimal.Name) && selectedAnimal.AnimalId != 0 && selectedAnimal.CategoryId > 0)
+                AnimalFromDb.UpdateAnimal(new Classes.DbClasses.Animal(selectedAnimal.AnimalId, selectedAnimal.Name, (int)selectedAnimal.CategoryId, selectedAnimal.Description?? ""));
         }
 
         private void ComboBoxHandler(DataGridViewCellEventArgs e)
         {
-            int selectedId = Convert.ToInt32(DG_ANIMALS.Rows[e.RowIndex].Cells[e.ColumnIndex].Value ?? 0);
-            string? selectedValue = null;
+            string? selectedValue = DG_ANIMALS.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() ?? "";
 
             var comboColumn = DG_ANIMALS.Columns[e.ColumnIndex] as DataGridViewComboBoxColumn;
             if (comboColumn is null || comboColumn.DataSource is null)
                 return;
 
-            foreach (var item in (comboColumn.DataSource as IEnumerable) ?? Array.Empty<object>())
-            {
-                if (item == null) continue;
-
-                var valueProp = item.GetType().GetProperty(comboColumn.ValueMember);
-                var displayProp = item.GetType().GetProperty(comboColumn.DisplayMember);
-
-                if (valueProp == null || displayProp == null)
-                    continue;
-
-                var value = valueProp.GetValue(item, null);
-                if (value == null) continue;
-
-                if (value.Equals(selectedId))
-                {
-                    var name = displayProp.GetValue(item, null);
-                    selectedValue = name?.ToString() ?? "";
-                    break;
-                }
-            }
-
-            OpenAnimalCrudForm(selectedId, selectedValue);
+            OpenAnimalCrudForm(selectedValue);
         }
 
-        private void OpenAnimalCrudForm(int selectedId, string? selectedValue)
+        private void OpenAnimalCrudForm(string? selectedValue)
         {
 
             Form? categoryAnimalForm = null;
@@ -213,7 +210,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Reestr
             if (selectedValue == "Добавить")
                 categoryAnimalForm = new CategoryAnimalForm(flagInsert: true);
 
-            if (selectedValue == "Удалить" && selectedId != 0)
+            if (selectedValue == "Удалить")
                 categoryAnimalForm = new CategoryAnimalReestr(flagDelete: true);
 
             if (selectedValue == "Изменить")
@@ -228,7 +225,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Reestr
             }
             else
             {
-                CategoryAnimal? selectedCategory = AnimalFromDb.GetCategory(selectedId);
+                CategoryAnimal? selectedCategory = AnimalFromDb.GetCategory(selectedValue!);
                 if (selectedCategory is null)
                     return;
 
@@ -236,6 +233,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Reestr
                 animals![DG_ANIMALS.CurrentRow.Index].CategoryName = selectedCategory.Name;
                 animals![DG_ANIMALS.CurrentRow.Index].CategoryDescription = selectedCategory.Description?? "";
                 DG_ANIMALS.DataSource = animals;
+                DG_ANIMALS.Refresh();
             }
         }
 

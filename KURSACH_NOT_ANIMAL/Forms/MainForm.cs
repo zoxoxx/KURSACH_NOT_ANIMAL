@@ -1,4 +1,6 @@
 ﻿using KURSACH_NOT_ANIMAL.Classes.DbClasses;
+using KURSACH_NOT_ANIMAL.Forms.Admin;
+using KURSACH_NOT_ANIMAL.Forms.Reestr;
 using KURSACH_NOT_ANIMAL.Model;
 using System;
 using System.Collections.Generic;
@@ -42,7 +44,14 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
         private void MENU_ITEM_ANIMALS_Click(object sender, EventArgs e)
         {
+            AnimalReestr animalReestr = new AnimalReestr();
+            animalReestr.ShowDialog();
+        }
 
+        private void MENU_ITEM_USERS_Click(object sender, EventArgs e)
+        {
+            UserReestr userReestr = new UserReestr();
+            userReestr.ShowDialog();
         }
     }
 }

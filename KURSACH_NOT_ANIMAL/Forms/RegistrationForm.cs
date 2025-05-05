@@ -80,7 +80,7 @@ namespace KURSACH_NOT_ANIMAL.Forms
                 (string.IsNullOrWhiteSpace(TB_PATRONYMIC.Text) ? "" : " " + TB_PATRONYMIC.Text.Trim())).Trim());
 
             if (result == 1)
-                NewUser = new UserSystem(TB_LASTNAME.Text.Trim() + " " + TB_NAME.Text.Trim() + TB_PATRONYMIC.Text is null || TB_PATRONYMIC.Text.Trim() == "" ? "" : (" "  + TB_PATRONYMIC.Text.Trim()),
+                NewUser = new UserSystem(TB_LASTNAME.Text.Trim() + " " + TB_NAME.Text.Trim() + (string.IsNullOrEmpty(TB_PATRONYMIC.Text.Trim()) ? "" : " " + TB_PATRONYMIC.Text.Trim()),
                     DateOnly.FromDateTime(DATE_PICKER_BIRTHDAY.Value), TB_PHONE.Text, 0, TB_LOGIN.Text, TB_PASSWORD.Text);
 
             this.Close();

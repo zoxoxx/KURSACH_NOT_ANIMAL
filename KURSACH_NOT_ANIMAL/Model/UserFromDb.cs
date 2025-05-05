@@ -1,5 +1,7 @@
 ﻿using KURSACH_NOT_ANIMAL.Classes.DbClasses;
+using KURSACH_NOT_ANIMAL.Classes.ViewClasses;
 using KURSACH_NOT_ANIMAL.Models;
+using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.VisualBasic.Logging;
 using Npgsql;
 using System;
@@ -57,6 +59,40 @@ namespace KURSACH_NOT_ANIMAL.Model
             }
 
             return currentUser;
+        }
+
+        public static int AddUserWithRole(string login, string password, DateOnly birthday, string phone, string phyo, int roleId)
+        {
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionStr.connectionString))
+                {
+                    connection.Open();
+
+                    string sqlExp = "insert into USER_SYSTEM(ROLE_ID, PHYO, BIRTHDAY, PHONE, BALANCE, LOGIN, PASSWORD) " +
+                        "select ID, @Phyo, @Birthday, @Phone, 0, @Login, @Password " +
+                        "from ROLE " +
+                        "where ID = @Id";
+                    NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
+                    cmd.Parameters.AddWithValue("Phyo", phyo);
+                    cmd.Parameters.AddWithValue("Birthday", birthday);
+                    cmd.Parameters.AddWithValue("Phone", phone);
+                    cmd.Parameters.AddWithValue("Id", roleId);
+                    cmd.Parameters.AddWithValue("Login", login);
+                    cmd.Parameters.AddWithValue("Password", password);
+                    int resultQuery = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show("Было вызвано исключение при добавлении нового пользователя в систему,\n" +
+                    "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return 666;
+            }
+
+            return 1;
         }
 
         public static int AddUser(string login, string password, DateOnly birthday, string phone, string phyo, string roleName = "Клиент")
@@ -156,7 +192,7 @@ namespace KURSACH_NOT_ANIMAL.Model
 
                 }
             }
-            catch(NpgsqlException ex)
+            catch (NpgsqlException ex)
             {
                 Debug.WriteLine(ex.Message);
                 MessageBox.Show("Было вызвано исключение при обновлении пользователя,\n" +
@@ -166,6 +202,105 @@ namespace KURSACH_NOT_ANIMAL.Model
             }
 
             return true;
+        }
+
+        public static List<UserView>? GetUsersWithRole()
+        {
+            List<UserView>? users = new List<UserView>();
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionStr.connectionString))
+                {
+                    connection.Open();
+
+                    string sqlExp = "select u.ID, u.PHYO, u.ROLE_ID, r.NAME, u.BIRTHDAY, u.PHONE, u.BALANCE, u.LOGIN, u.PASSWORD " +
+                        "from USER_SYSTEM u " +
+                        "left join ROLE r on r.ID = u.ROLE_ID";
+                    NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (!reader.HasRows)
+                        return null;
+
+                    while (reader.Read())
+                        users.Add(new UserView((int)reader[0], reader[1].ToString()!, (int)reader[2],
+                            reader[3].ToString()!, DateOnly.FromDateTime(((DateTime)reader[4])), reader[5].ToString()!, (double)reader[6], reader[7].ToString()!, reader[8].ToString()!));
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show("Было вызвано исключение при проверке наличия пользователя в системе,\n" +
+                    "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return null;
+            }
+
+            return users;
+        }
+
+        public static bool DeleteUser(int userId)
+        {
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionStr.connectionString))
+                {
+                    connection.Open();
+
+                    string sqlExp = "delete from USER_SYSTEM " +
+                        "where ID = @UserId";
+                    NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
+                    cmd.Parameters.AddWithValue("UserId", userId);
+
+                    int resultQuery = cmd.ExecuteNonQuery();
+                }
+            }
+
+            catch(NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show("Было вызвано исключение при удалении пользователя пользователя,\n" +
+                    "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }
+
+            return true;
+        }
+
+        public static List<UserRole>? GetRoles()
+        {
+            List<UserRole>? roles = new List<UserRole>();
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionStr.connectionString))
+                {
+                    connection.Open();
+
+                    string sqlExp = "select * " +
+                        "from ROLE";
+                    NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
+
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (!reader.HasRows)
+                        return null;
+
+                    while (reader.Read())
+                        roles.Add(new UserRole((int)reader[0], reader[1].ToString()?? "Отсутствует"));
+                }
+            }
+
+            catch(NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show("Было вызвано исключение при получении ролей пользователей,\n" +
+                    "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return null;
+            }
+
+            return roles;
         }
     }
 }

@@ -51,10 +51,10 @@ namespace KURSACH_NOT_ANIMAL.Forms.Animal
             Form? categoryAnimalForm = null;
 
             if (flagDelete != null)
-                categoryAnimalForm = new CategoryAnimalForm(categoryId: selectedCategory.Id, flagDelete: true);
+                categoryAnimalForm = new CategoryAnimalForm(categoryName: selectedCategory.Name, flagDelete: true);
 
             if (flagUpdate != null)
-                categoryAnimalForm = new CategoryAnimalForm(categoryId: selectedCategory.Id, flagUpdate: true);
+                categoryAnimalForm = new CategoryAnimalForm(categoryName: selectedCategory.Name, flagUpdate: true);
 
             if (categoryAnimalForm != null)
                 categoryAnimalForm.ShowDialog();
