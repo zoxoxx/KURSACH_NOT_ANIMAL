@@ -30,7 +30,6 @@
         {
             BTN_ADD = new Button();
             DG_SKLAD = new DataGridView();
-            BTN_DELETE = new Button();
             SkladId = new DataGridViewTextBoxColumn();
             ProductName = new DataGridViewTextBoxColumn();
             ProductCount = new DataGridViewTextBoxColumn();
@@ -38,6 +37,7 @@
             PartnerName = new DataGridViewTextBoxColumn();
             PurchasePrice = new DataGridViewTextBoxColumn();
             DatePrihod = new DataGridViewTextBoxColumn();
+            BTN_DELETE = new Button();
             ((System.ComponentModel.ISupportInitialize)DG_SKLAD).BeginInit();
             SuspendLayout();
             // 
@@ -65,20 +65,6 @@
             DG_SKLAD.RowHeadersWidth = 51;
             DG_SKLAD.Size = new Size(776, 390);
             DG_SKLAD.TabIndex = 4;
-            // 
-            // BTN_DELETE
-            // 
-            BTN_DELETE.Font = new Font("Roboto", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            BTN_DELETE.Image = Properties.Resources.DeleteIcon;
-            BTN_DELETE.ImageAlign = ContentAlignment.MiddleLeft;
-            BTN_DELETE.Location = new Point(260, 10);
-            BTN_DELETE.Name = "BTN_DELETE";
-            BTN_DELETE.RightToLeft = RightToLeft.No;
-            BTN_DELETE.Size = new Size(198, 35);
-            BTN_DELETE.TabIndex = 6;
-            BTN_DELETE.Text = "Удалить";
-            BTN_DELETE.TextImageRelation = TextImageRelation.TextBeforeImage;
-            BTN_DELETE.UseVisualStyleBackColor = true;
             // 
             // SkladId
             // 
@@ -130,6 +116,20 @@
             DatePrihod.Name = "DatePrihod";
             DatePrihod.Width = 75;
             // 
+            // BTN_DELETE
+            // 
+            BTN_DELETE.Font = new Font("Roboto", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            BTN_DELETE.Image = Properties.Resources.DeleteIcon;
+            BTN_DELETE.ImageAlign = ContentAlignment.MiddleLeft;
+            BTN_DELETE.Location = new Point(260, 10);
+            BTN_DELETE.Name = "BTN_DELETE";
+            BTN_DELETE.RightToLeft = RightToLeft.No;
+            BTN_DELETE.Size = new Size(198, 35);
+            BTN_DELETE.TabIndex = 6;
+            BTN_DELETE.Text = "Удалить";
+            BTN_DELETE.TextImageRelation = TextImageRelation.TextBeforeImage;
+            BTN_DELETE.UseVisualStyleBackColor = true;
+            // 
             // SkladReestr
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -140,6 +140,7 @@
             Controls.Add(DG_SKLAD);
             Name = "SkladReestr";
             Text = "Закупки";
+            Load += SkladReestr_Load;
             ((System.ComponentModel.ISupportInitialize)DG_SKLAD).EndInit();
             ResumeLayout(false);
         }
