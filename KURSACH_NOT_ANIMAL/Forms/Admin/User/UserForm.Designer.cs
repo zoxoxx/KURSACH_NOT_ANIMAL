@@ -74,6 +74,8 @@
             TB_PHONE.PlaceholderText = "Номер телефона";
             TB_PHONE.Size = new Size(186, 31);
             TB_PHONE.TabIndex = 25;
+            TB_PHONE.TextChanged += TB_PHONE_TextChanged;
+            TB_PHONE.KeyDown += TB_PHONE_KeyDown;
             // 
             // label4
             // 
