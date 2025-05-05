@@ -20,6 +20,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin
         private bool? flagUpdate;
         private UserView? changedUser;
         private List<UserRole>? roles;
+        string digits = "";
         public UserForm(bool? flagInsert = null, bool? flagUpdate = null, UserView? changedUser = null)
         {
             this.flagInsert = flagInsert;
@@ -110,7 +111,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin
                 return;
             }
 
-            if (TB_PHONE.Text.Length > 11 || TB_PHONE.Text.Length < 11)
+            if (digits.Length > 11 || digits.Length < 11)
             {
                 MessageBox.Show("Длина номера мобильного телефона должна составлять 11 знаков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -138,7 +139,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin
             if (flagInsert != null)
             {
                 int result = UserFromDb.AddUserWithRole(TB_LOGIN.Text, TB_PASSWORD.Text,
-                    DateOnly.FromDateTime(DATE_PICKER_BIRTHDAY.Value), TB_PHONE.Text,
+                    DateOnly.FromDateTime(DATE_PICKER_BIRTHDAY.Value), digits,
                     TB_LASTNAME.Text.Trim() + " " + TB_NAME.Text.Trim() + (string.IsNullOrEmpty(TB_PATRONYMIC.Text.Trim()) ? "" : " " + TB_PATRONYMIC.Text.Trim()),
                     Convert.ToInt32(CMB_ROLE.SelectedValue));
 
@@ -151,13 +152,80 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin
                 bool result = UserFromDb.UpdateUser(new UserSystem(
                     changedUser.Id, Convert.ToInt32(CMB_ROLE.SelectedValue),
                     TB_LASTNAME.Text.Trim() + " " + TB_NAME.Text.Trim() + (string.IsNullOrEmpty(TB_PATRONYMIC.Text.Trim()) ? "" : " " + TB_PATRONYMIC.Text.Trim()),
-                    DateOnly.FromDateTime(DATE_PICKER_BIRTHDAY.Value), TB_PHONE.Text, Convert.ToDouble(TB_BALANCE.Text), TB_LOGIN.Text, TB_PASSWORD.Text));
+                    DateOnly.FromDateTime(DATE_PICKER_BIRTHDAY.Value), digits, Convert.ToDouble(TB_BALANCE.Text), TB_LOGIN.Text, TB_PASSWORD.Text));
 
                 if (result)
                     MessageBox.Show("Пользователь успешно обновлен.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             this.Close();
+        }
+        private void TB_PHONE_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back)
+            {
+                if (digits.Length > 0)
+                {
+                    digits = digits.Substring(0, digits.Length - 1);
+
+                    string formatted = FormatPhoneNumber();
+
+                    TB_PHONE.TextChanged -= TB_PHONE_TextChanged;
+                    TB_PHONE.Text = formatted;
+                    TB_PHONE.SelectionStart = TB_PHONE.Text.Length;
+                    TB_PHONE.TextChanged += TB_PHONE_TextChanged;
+                }
+
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void TB_PHONE_TextChanged(object sender, EventArgs e)
+        {
+            string currentDigits = System.Text.RegularExpressions.Regex.Replace(TB_PHONE.Text, @"\D", "");
+            if (currentDigits.Length > digits.Length)
+            {
+                string added = currentDigits.Substring(digits.Length);
+                digits += System.Text.RegularExpressions.Regex.Replace(added, @"\D", "");
+            }
+
+            if (digits.Length > 11)
+                digits = digits.Substring(0, 11);
+
+            string formatted = FormatPhoneNumber();
+
+            TB_PHONE.TextChanged -= TB_PHONE_TextChanged;
+            TB_PHONE.Text = formatted;
+            TB_PHONE.SelectionStart = TB_PHONE.Text.Length;
+            TB_PHONE.TextChanged += TB_PHONE_TextChanged;
+        }
+
+        private string FormatPhoneNumber()
+        {
+            if (string.IsNullOrEmpty(digits))
+                return "";
+
+            if (digits.StartsWith("8"))
+                digits = "7" + digits.Substring(1);
+            else if (!digits.StartsWith("7"))
+                digits = "7" + digits;
+
+            string formatted = "+";
+
+            for (int i = 0; i < digits.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0: formatted += digits[i] + " "; break;
+                    case 1: formatted += "(" + digits[i]; break;
+                    case 3: formatted += digits[i] + ") "; break;
+                    case 6: formatted += digits[i] + "-"; break;
+                    case 8: formatted += digits[i] + "-"; break;
+                    default: formatted += digits[i]; break;
+                }
+            }
+
+            return formatted;
         }
     }
 }

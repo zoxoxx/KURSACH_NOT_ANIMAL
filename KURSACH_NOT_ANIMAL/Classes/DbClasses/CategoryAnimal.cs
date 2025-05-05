@@ -10,7 +10,6 @@ namespace KURSACH_NOT_ANIMAL.Classes.DbClasses
     {
         public string? Name { get; set; }
         public int Id { get; set; }
-        
         public string? Description { get; set; }
 
         public CategoryAnimal(int id, string name, string description)
