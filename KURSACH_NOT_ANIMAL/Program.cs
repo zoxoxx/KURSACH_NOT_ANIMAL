@@ -1,12 +1,13 @@
 using KURSACH_NOT_ANIMAL.Forms.Admin;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Shop;
+using KURSACH_NOT_ANIMAL.Forms.Admin.Sklad;
 using KURSACH_NOT_ANIMAL.Forms.Reestr;
 
 namespace KURSACH_NOT_ANIMAL
 {
     internal static class Program
     {
-        internal static ShopReestr StartForm { get; set; } = new ShopReestr(flagPartner: true);
+        internal static SkladReestr StartForm { get; set; } = new SkladReestr();
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
