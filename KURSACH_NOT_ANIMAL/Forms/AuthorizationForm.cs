@@ -20,16 +20,6 @@ namespace KURSACH_NOT_ANIMAL
                 return;
             }
 
-            if (!Regex.IsMatch(TB_PASSWORD.Text, "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$"))
-            {
-                MessageBox.Show("Пароль должен быть не менее 8 символов,\n" +
-                    " иметь один специальный символ,\n" +
-                    "буквы верхнего и нижнего регистров,\n" +
-                    "и хотя бы одну цифру.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return;
-            }
-
             UserSystem? currentUser = UserFromDb.GetUser(TB_LOGIN.Text, TB_PASSWORD.Text);
 
             if (currentUser is null)

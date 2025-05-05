@@ -58,14 +58,13 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin
                 TB_PASSWORD.Text = changedUser.Password;
 
                 if (changedUser.RoleName != "Администратор")
-                    TB_BALANCE.Text = changedUser.Balance.ToString()?? "0";
+                    TB_BALANCE.Text = changedUser.Balance.ToString() ?? "0";
                 else
                 {
                     TB_BALANCE.Text = "0";
                     TB_BALANCE.Visible = false;
-                    LBL_BALANCE.Visible = false;
                 }
-                    CMB_ROLE.SelectedValue = changedUser.RoleId;
+                CMB_ROLE.SelectedValue = changedUser.RoleId;
             }
         }
 

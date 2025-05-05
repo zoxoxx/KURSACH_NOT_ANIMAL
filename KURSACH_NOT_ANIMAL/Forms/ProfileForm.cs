@@ -15,6 +15,7 @@ namespace KURSACH_NOT_ANIMAL.Forms
     public partial class ProfileForm : Form
     {
         UserSystem ChangedUser { get; set; }
+        string digits = "";
         public ProfileForm(UserSystem currentUser)
         {
             this.ChangedUser = currentUser;
@@ -54,7 +55,7 @@ namespace KURSACH_NOT_ANIMAL.Forms
                 return;
             }
 
-            if (TB_PHONE.Text.Length > 11 || TB_PHONE.Text.Length < 11)
+            if (digits.Length > 11 || digits.Length < 11)
             {
                 MessageBox.Show("Длина номера мобильного телефона должна составлять 11 знаков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -74,13 +75,81 @@ namespace KURSACH_NOT_ANIMAL.Forms
             ChangedUser.Birthday = DateOnly.FromDateTime(DATE_PICKER_BIRTHDAY.Value);
             ChangedUser.PHYO = (TB_LASTNAME.Text.Trim() + " " + TB_NAME.Text.Trim() +
                 (string.IsNullOrWhiteSpace(TB_PATRONYMIC.Text) ? "" : " " + TB_PATRONYMIC.Text.Trim())).Trim();
-            ChangedUser.Phone = TB_PHONE.Text;
+            ChangedUser.Phone = digits.Trim();
 
-            if(!UserFromDb.UpdateUser(ChangedUser))
+            if (!UserFromDb.UpdateUser(ChangedUser))
                 return;
 
             MessageBox.Show($"{ChangedUser.PHYO}, профиль успешно обновлён.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             this.Close();
+        }
+
+        private void TB_PHONE_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back)
+            {
+                if (digits.Length > 0)
+                {
+                    digits = digits.Substring(0, digits.Length - 1);
+
+                    string formatted = FormatPhoneNumber();
+
+                    TB_PHONE.TextChanged -= TB_PHONE_TextChanged;
+                    TB_PHONE.Text = formatted;
+                    TB_PHONE.SelectionStart = TB_PHONE.Text.Length;
+                    TB_PHONE.TextChanged += TB_PHONE_TextChanged;
+                }
+
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void TB_PHONE_TextChanged(object sender, EventArgs e)
+        {
+            string currentDigits = System.Text.RegularExpressions.Regex.Replace(TB_PHONE.Text, @"\D", "");
+            if (currentDigits.Length > digits.Length)
+            {
+                string added = currentDigits.Substring(digits.Length);
+                digits += System.Text.RegularExpressions.Regex.Replace(added, @"\D", "");
+            }
+
+            if (digits.Length > 11)
+                digits = digits.Substring(0, 11);
+
+            string formatted = FormatPhoneNumber();
+
+            TB_PHONE.TextChanged -= TB_PHONE_TextChanged;
+            TB_PHONE.Text = formatted;
+            TB_PHONE.SelectionStart = TB_PHONE.Text.Length;
+            TB_PHONE.TextChanged += TB_PHONE_TextChanged;
+        }
+
+        private string FormatPhoneNumber()
+        {
+            if (string.IsNullOrEmpty(digits))
+                return "";
+
+            if (digits.StartsWith("8"))
+                digits = "7" + digits.Substring(1);
+            else if (!digits.StartsWith("7"))
+                digits = "7" + digits;
+
+            string formatted = "+";
+
+            for (int i = 0; i < digits.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0: formatted += digits[i] + " "; break;
+                    case 1: formatted += "(" + digits[i]; break;
+                    case 3: formatted += digits[i] + ") "; break;
+                    case 6: formatted += digits[i] + "-"; break;
+                    case 8: formatted += digits[i] + "-"; break;
+                    default: formatted += digits[i]; break;
+                }
+            }
+
+            return formatted;
         }
     }
 }
