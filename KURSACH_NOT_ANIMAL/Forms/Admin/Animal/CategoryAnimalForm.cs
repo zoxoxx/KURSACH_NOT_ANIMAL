@@ -47,22 +47,29 @@ namespace KURSACH_NOT_ANIMAL.Forms.Animal
             categoryAnimal.Name = TB_NAME.Text;
             categoryAnimal.Description = string.IsNullOrWhiteSpace(TB_DESCIPRION.Text) ? "" : TB_DESCIPRION.Text;
 
+            bool result;
             if (flagDelete != null)
             { 
-                AnimalFromDb.DeleteCategory(categoryAnimal.Id);
-                MessageBox.Show("Категория успешно удалена.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                result = AnimalFromDb.DeleteCategory(categoryAnimal.Id);
+
+                if (result)
+                    MessageBox.Show("Категория успешно удалена.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             if (flagInsert != null)
-            { 
-                AnimalFromDb.AddCategory(TB_NAME.Text, TB_DESCIPRION.Text);
-                MessageBox.Show("Категория успешно добавлена.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                result =  AnimalFromDb.AddCategory(TB_NAME.Text, TB_DESCIPRION.Text);
+
+                if (result)
+                    MessageBox.Show("Категория успешно добавлена.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             if (flagUpdate != null)
             {
-                AnimalFromDb.UpdateCategory(categoryAnimal);
-                MessageBox.Show("Категория успешно обновлена.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                result = AnimalFromDb.UpdateCategory(categoryAnimal);
+
+                if (result)
+                    MessageBox.Show("Категория успешно обновлена.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             this.Close();
