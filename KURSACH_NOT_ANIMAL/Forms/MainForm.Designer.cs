@@ -85,12 +85,14 @@
             MENU_ITEM_PARTNERS.Name = "MENU_ITEM_PARTNERS";
             MENU_ITEM_PARTNERS.Size = new Size(224, 26);
             MENU_ITEM_PARTNERS.Text = "Партнеры";
+            MENU_ITEM_PARTNERS.Click += MENU_ITEM_PARTNERS_Click;
             // 
             // MENU_ITEM_SHOPS
             // 
             MENU_ITEM_SHOPS.Name = "MENU_ITEM_SHOPS";
             MENU_ITEM_SHOPS.Size = new Size(224, 26);
             MENU_ITEM_SHOPS.Text = "Магазины";
+            MENU_ITEM_SHOPS.Click += MENU_ITEM_SHOPS_Click;
             // 
             // MENU_ITEM_SCHEDULE
             // 
@@ -108,13 +110,13 @@
             // MENU_ITEM_SKLAD
             // 
             MENU_ITEM_SKLAD.Name = "MENU_ITEM_SKLAD";
-            MENU_ITEM_SKLAD.Size = new Size(224, 26);
+            MENU_ITEM_SKLAD.Size = new Size(157, 26);
             MENU_ITEM_SKLAD.Text = "Закупки";
             // 
             // MENU_ITEM_OPERATIONS
             // 
             MENU_ITEM_OPERATIONS.Name = "MENU_ITEM_OPERATIONS";
-            MENU_ITEM_OPERATIONS.Size = new Size(224, 26);
+            MENU_ITEM_OPERATIONS.Size = new Size(157, 26);
             MENU_ITEM_OPERATIONS.Text = "Продажи";
             // 
             // MENU_PROFILE

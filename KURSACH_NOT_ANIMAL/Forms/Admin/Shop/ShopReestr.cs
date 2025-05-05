@@ -98,11 +98,11 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Shop
 
             if (flagPartner == true)
             {
-                shopForm = new ShopForm(flagInsert: true, flagPartner: true);
+                shopForm = new ShopForm(flagUpdate: true, flagPartner: true, shop: selectedShop);
             }
             else
             {
-                shopForm = new ShopForm(flagInsert: true, flagShop: true);
+                shopForm = new ShopForm(flagUpdate: true, flagShop: true, shop: selectedShop);
             }
 
             this.Hide();

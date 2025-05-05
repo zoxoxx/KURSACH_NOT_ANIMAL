@@ -284,7 +284,7 @@ namespace KURSACH_NOT_ANIMAL.Model
                 {
                     connection.Open();
 
-                    string sqlExp = "update PARTNER set " +
+                    string sqlExp = "update SHOP set " +
                         "   NAME = @Name, " +
                         "   ADRESS = @Adress, " +
                         "   CITY_ID = @CityId " +
