@@ -26,7 +26,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Sklad
 
         private void DataGridLoad()
         {
-            DG_SK
+            //DG_SK
         }
     }
 }
