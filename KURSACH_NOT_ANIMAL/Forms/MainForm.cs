@@ -79,5 +79,13 @@ namespace KURSACH_NOT_ANIMAL.Forms
             skladReestr.ShowDialog();
             this.Show();
         }
+
+        private void MENU_ITEM_SCHEDULE_Click(object sender, EventArgs e)
+        {
+            ScheduleReestr scheduleReestr = new ScheduleReestr();
+            this.Hide();
+            scheduleReestr.ShowDialog();
+            this.Show();
+        }
     }
 }

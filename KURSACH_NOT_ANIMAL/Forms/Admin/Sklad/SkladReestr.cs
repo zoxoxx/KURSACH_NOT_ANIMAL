@@ -1,4 +1,5 @@
-﻿using KURSACH_NOT_ANIMAL.Classes.ViewClasses;
+﻿using KURSACH_NOT_ANIMAL.Classes.SystemClasses;
+using KURSACH_NOT_ANIMAL.Classes.ViewClasses;
 using KURSACH_NOT_ANIMAL.Model;
 using System;
 using System.Collections.Generic;
@@ -58,9 +59,13 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Sklad
             if (selectedPurchase is null)
                 return;
 
-            SkladFromDb.DeletePurchase(selectedPurchase.Id);
+            bool result = SkladFromDb.DeletePurchase(selectedPurchase.Id);
 
-            DataGridLoad();
+            if (result)
+            {
+                Logger.Log($"Была удалена закупка продукции '{selectedPurchase.ProductName}' на количество {selectedPurchase.Count}, пользователем {MainForm.CurrentUser.PHYO}.");
+                DataGridLoad();
+            }
         }
 
         private void DG_SKLAD_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

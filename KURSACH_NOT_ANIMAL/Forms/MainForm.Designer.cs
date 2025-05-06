@@ -99,6 +99,7 @@
             MENU_ITEM_SCHEDULE.Name = "MENU_ITEM_SCHEDULE";
             MENU_ITEM_SCHEDULE.Size = new Size(224, 26);
             MENU_ITEM_SCHEDULE.Text = "Рабочий график";
+            MENU_ITEM_SCHEDULE.Click += MENU_ITEM_SCHEDULE_Click;
             // 
             // MENU_WORK
             // 
@@ -110,14 +111,14 @@
             // MENU_ITEM_SKLAD
             // 
             MENU_ITEM_SKLAD.Name = "MENU_ITEM_SKLAD";
-            MENU_ITEM_SKLAD.Size = new Size(224, 26);
+            MENU_ITEM_SKLAD.Size = new Size(157, 26);
             MENU_ITEM_SKLAD.Text = "Закупки";
             MENU_ITEM_SKLAD.Click += MENU_ITEM_SKLAD_Click;
             // 
             // MENU_ITEM_OPERATIONS
             // 
             MENU_ITEM_OPERATIONS.Name = "MENU_ITEM_OPERATIONS";
-            MENU_ITEM_OPERATIONS.Size = new Size(224, 26);
+            MENU_ITEM_OPERATIONS.Size = new Size(157, 26);
             MENU_ITEM_OPERATIONS.Text = "Продажи";
             // 
             // MENU_PROFILE
