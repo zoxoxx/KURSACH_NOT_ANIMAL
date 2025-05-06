@@ -44,7 +44,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Reestr
 
         private void DataGridLoad()
         {
-            animals = AnimalFromDb.GetAnimalWithCategory();
+            animals = AnimalFromDb.GetAnimalsWithCategory();
             DG_ANIMALS.DataSource = animals;
         }
 

@@ -350,7 +350,7 @@ namespace KURSACH_NOT_ANIMAL.Model
             return true;
         }
 
-        public static List<AnimalView>? GetAnimalWithCategory()
+        public static List<AnimalView>? GetAnimalsWithCategory()
         {
             List<AnimalView>? animals = new List<AnimalView>();
 
