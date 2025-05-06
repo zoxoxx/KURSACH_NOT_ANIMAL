@@ -9,7 +9,7 @@ namespace KURSACH_NOT_ANIMAL
 {
     internal static class Program
     {
-        internal static AnimalReestr StartForm { get; set; } = new AnimalReestr();
+        internal static AuthorizationForm StartForm { get; set; } = new AuthorizationForm();
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

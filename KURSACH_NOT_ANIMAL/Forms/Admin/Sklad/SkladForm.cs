@@ -1,4 +1,5 @@
 ﻿using KURSACH_NOT_ANIMAL.Classes.DbClasses;
+using KURSACH_NOT_ANIMAL.Classes.SystemClasses;
 using KURSACH_NOT_ANIMAL.Classes.ViewClasses;
 using KURSACH_NOT_ANIMAL.Model;
 using System;
@@ -104,6 +105,9 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Sklad
                 bool result = SkladFromDb.UpdatePurchase(Convert.ToInt32(CMB_PRODUCT.SelectedValue), Convert.ToInt32(TB_COUNT.Text), 
                     Convert.ToInt32(CMB_SHOP.SelectedValue), Convert.ToInt32(CMB_PARTNER.SelectedValue), 
                     Convert.ToDouble(TB_PRICE.Text), datePurchase, purchase.Id);
+
+                if (result)
+                    Logger.Log($"Была обновлена закупка продукции '{purchase.ProductName}' в количестве {purchase.Count}, пользователем {MainForm.CurrentUser.PHYO}.");
             }
 
             this.Close();
