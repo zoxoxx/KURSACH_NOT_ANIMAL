@@ -52,7 +52,6 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.ProductRes
                 BTN_ACTION.Text = "Изменить";
 
                 TB_NAME.Text = product.Name;
-                TB_COMMENTARY.Text = product.Commentary;
                 TB_DESCRIPTION.Text = product.Description;
                 TB_PRICE.Text = product.Price.ToString();
                 TB_WEIGHT.Text = product.Weight.ToString();
@@ -111,7 +110,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.ProductRes
 
             if (flagInsert == true)
             {
-                result = ProductFromDb.AddProduct(Convert.ToDouble(TB_WEIGHT.Text), TB_NAME.Text, Convert.ToInt32(TB_PRICE.Text), Convert.ToInt32(CMB_CATEGORY.SelectedValue), TB_DESCRIPTION.Text, TB_COMMENTARY.Text);
+                result = ProductFromDb.AddProduct(Convert.ToDouble(TB_WEIGHT.Text), TB_NAME.Text, Convert.ToInt32(TB_PRICE.Text), Convert.ToInt32(CMB_CATEGORY.SelectedValue), TB_DESCRIPTION.Text, "");
 
                 if (result)
                     if (!string.IsNullOrWhiteSpace(TB_ANIMALS.Text) && animalsId.Count > 0)
@@ -136,7 +135,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.ProductRes
             if (flagUpdate == true && product != null)
             {
                 result = ProductFromDb.UpdateProduct(new Product(product.Id, Convert.ToDouble(TB_WEIGHT.Text),
-                    TB_NAME.Text, TB_COMMENTARY.Text, TB_DESCRIPTION.Text, Convert.ToInt32(CMB_CATEGORY.SelectedValue.ToString()), 
+                    TB_NAME.Text, "", TB_DESCRIPTION.Text, Convert.ToInt32(CMB_CATEGORY.SelectedValue.ToString()), 
                     Convert.ToInt32(TB_PRICE.Text)));
 
                 if (result)

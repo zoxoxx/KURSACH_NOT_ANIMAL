@@ -40,7 +40,7 @@
             // 
             // TB_NAME
             // 
-            TB_NAME.Location = new Point(43, 101);
+            TB_NAME.Location = new Point(43, 106);
             TB_NAME.Margin = new Padding(4);
             TB_NAME.Name = "TB_NAME";
             TB_NAME.PlaceholderText = "Имя";
@@ -110,9 +110,9 @@
             label1.Font = new Font("Segoe UI", 22F, FontStyle.Regular, GraphicsUnit.Point, 204);
             label1.Location = new Point(71, 21);
             label1.Name = "label1";
-            label1.Size = new Size(197, 60);
+            label1.Size = new Size(196, 60);
             label1.TabIndex = 8;
-            label1.Text = "Магазин";
+            label1.Text = "Партнер";
             // 
             // ShopForm
             // 
@@ -124,7 +124,7 @@
             MinimumSize = new Size(1000, 600);
             Name = "ShopForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Магазин";
+            Text = "Магазин партнер";
             Load += ShopForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

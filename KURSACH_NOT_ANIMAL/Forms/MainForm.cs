@@ -67,14 +67,6 @@ namespace KURSACH_NOT_ANIMAL.Forms
             this.Show();
         }
 
-        private void MENU_ITEM_SHOPS_Click(object sender, EventArgs e)
-        {
-            ShopReestr shopReestr = new ShopReestr(flagShop: true);
-            this.Hide();
-            shopReestr.ShowDialog();
-            this.Show();
-        }
-
         private void MENU_ITEM_SKLAD_Click(object sender, EventArgs e)
         {
             SkladReestr skladReestr = new SkladReestr();
