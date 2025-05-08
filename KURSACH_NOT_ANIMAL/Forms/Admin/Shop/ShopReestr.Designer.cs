@@ -41,13 +41,14 @@
             // 
             // BTN_ADD
             // 
-            BTN_ADD.Font = new Font("Roboto", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            BTN_ADD.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
             BTN_ADD.Image = Properties.Resources.AddIcon;
             BTN_ADD.ImageAlign = ContentAlignment.MiddleLeft;
-            BTN_ADD.Location = new Point(24, 10);
+            BTN_ADD.Location = new Point(30, 12);
+            BTN_ADD.Margin = new Padding(4, 4, 4, 4);
             BTN_ADD.Name = "BTN_ADD";
             BTN_ADD.RightToLeft = RightToLeft.No;
-            BTN_ADD.Size = new Size(198, 35);
+            BTN_ADD.Size = new Size(248, 44);
             BTN_ADD.TabIndex = 6;
             BTN_ADD.Text = "Добавить";
             BTN_ADD.TextImageRelation = TextImageRelation.TextBeforeImage;
@@ -56,13 +57,14 @@
             // 
             // BTN_DELETE
             // 
-            BTN_DELETE.Font = new Font("Roboto", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            BTN_DELETE.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
             BTN_DELETE.Image = Properties.Resources.DeleteIcon;
             BTN_DELETE.ImageAlign = ContentAlignment.MiddleLeft;
-            BTN_DELETE.Location = new Point(239, 10);
+            BTN_DELETE.Location = new Point(299, 12);
+            BTN_DELETE.Margin = new Padding(4, 4, 4, 4);
             BTN_DELETE.Name = "BTN_DELETE";
             BTN_DELETE.RightToLeft = RightToLeft.No;
-            BTN_DELETE.Size = new Size(198, 35);
+            BTN_DELETE.Size = new Size(248, 44);
             BTN_DELETE.TabIndex = 5;
             BTN_DELETE.Text = "Удалить";
             BTN_DELETE.TextImageRelation = TextImageRelation.TextBeforeImage;
@@ -77,11 +79,12 @@
             DG_SHOPS.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DG_SHOPS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_SHOPS.Columns.AddRange(new DataGridViewColumn[] { ShopId, ShopName, Adress, CityId, CityName });
-            DG_SHOPS.Location = new Point(12, 51);
+            DG_SHOPS.Location = new Point(15, 64);
+            DG_SHOPS.Margin = new Padding(4, 4, 4, 4);
             DG_SHOPS.Name = "DG_SHOPS";
             DG_SHOPS.ReadOnly = true;
             DG_SHOPS.RowHeadersWidth = 51;
-            DG_SHOPS.Size = new Size(776, 390);
+            DG_SHOPS.Size = new Size(970, 488);
             DG_SHOPS.TabIndex = 4;
             DG_SHOPS.CellContentDoubleClick += DG_SHOPS_CellContentDoubleClick;
             // 
@@ -124,15 +127,16 @@
             // 
             // ShopReestr
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1000, 562);
             Controls.Add(BTN_ADD);
             Controls.Add(BTN_DELETE);
             Controls.Add(DG_SHOPS);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "ShopReestr";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Магазины";
+            Text = "Магазины партнеры";
             Load += ShopReestr_Load;
             ((System.ComponentModel.ISupportInitialize)DG_SHOPS).EndInit();
             ResumeLayout(false);

@@ -14,13 +14,11 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Shop
 {
     public partial class ShopReestr : Form
     {
-        bool? flagShop;
         bool? flagPartner;
         List<ShopView>? shops;
-        public ShopReestr(bool? flagShop = null, bool? flagPartner = null)
+        public ShopReestr(bool? flagPartner = null)
         {
             this.flagPartner = flagPartner;
-            this.flagShop = flagShop;
 
             InitializeComponent();
 
@@ -45,24 +43,13 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Shop
             if (flagPartner == true)
                 shops = ShopFromDb.GetPartnerShops();
 
-            if (flagShop == true)
-                shops = ShopFromDb.GetOurShops();
-
             DG_SHOPS.DataSource = shops;
         }
 
         private void BTN_ADD_Click(object sender, EventArgs e)
         {
             Form? shopForm;
-
-            if (flagPartner == true)
-            {
-                shopForm = new ShopForm(flagInsert: true, flagPartner: true);
-            }
-            else
-            {
-                shopForm = new ShopForm(flagInsert: true, flagShop: true);
-            }
+            shopForm = new ShopForm(flagInsert: true, flagPartner: true);
 
             this.Hide();
             shopForm.ShowDialog();
@@ -81,9 +68,6 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Shop
             if (flagPartner == true)
                 ShopFromDb.DeletePartnerShop(selectedShop.Id);
 
-            if (flagShop == true)
-                ShopFromDb.DeleteShop(selectedShop.Id);
-
             DataGridLoad();
         }
 
@@ -95,15 +79,8 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Shop
                 return;
 
             Form? shopForm;
+            shopForm = new ShopForm(flagUpdate: true, flagPartner: true, shop: selectedShop);
 
-            if (flagPartner == true)
-            {
-                shopForm = new ShopForm(flagUpdate: true, flagPartner: true, shop: selectedShop);
-            }
-            else
-            {
-                shopForm = new ShopForm(flagUpdate: true, flagShop: true, shop: selectedShop);
-            }
 
             this.Hide();
             shopForm.ShowDialog();

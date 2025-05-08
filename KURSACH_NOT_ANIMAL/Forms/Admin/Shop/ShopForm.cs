@@ -15,16 +15,14 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Shop
 {
     public partial class ShopForm : Form
     {
-        private bool? flagShop;
         private bool? flagPartner;
         private bool? flagInsert;
         private bool? flagUpdate;
         private ShopView? shop;
         private List<City>? cities; 
-        public ShopForm(bool? flagShop = null, bool? flagPartner = null,
+        public ShopForm(bool? flagPartner = null,
             bool? flagInsert = null, bool? flagUpdate = null, ShopView? shop = null)
         {
-            this.flagShop = flagShop;
             this.flagPartner = flagPartner;
             this.flagInsert = flagInsert;
             this.flagUpdate = flagUpdate;
@@ -64,13 +62,13 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Shop
         {
             if (string.IsNullOrWhiteSpace(TB_ADRESS.Text))
             {
-                MessageBox.Show("Адрес магазина должен быть заполнен.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Адрес магазина партнера должен быть заполнен.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(TB_NAME.Text))
             {
-                MessageBox.Show("Имя магазина должно быть заполнено.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Имя магазина партнера должно быть заполнено.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -87,8 +85,6 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Shop
             if (flagInsert == true)
             {
                 bool result = false;
-                if (flagShop == true)
-                    result = ShopFromDb.AddShop(TB_NAME.Text, TB_ADRESS.Text, Convert.ToInt32(CMB_CITY.SelectedValue));
 
                 if (flagPartner == true)
                     result = ShopFromDb.AddPartnerShop(TB_NAME.Text, TB_ADRESS.Text, Convert.ToInt32(CMB_CITY.SelectedValue));
@@ -100,8 +96,6 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Shop
             if (flagUpdate == true && shop != null)
             {
                 bool result = false;
-                if (flagShop == true)
-                    result = ShopFromDb.UpdateShop(shop.Id, TB_NAME.Text, TB_ADRESS.Text, Convert.ToInt32(CMB_CITY.SelectedValue));
 
                 if (flagPartner == true)
                     result = ShopFromDb.UpdatePartnerShop(shop.Id, TB_NAME.Text, TB_ADRESS.Text, Convert.ToInt32(CMB_CITY.SelectedValue));
