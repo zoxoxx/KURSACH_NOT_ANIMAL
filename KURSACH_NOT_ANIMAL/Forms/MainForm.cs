@@ -1,5 +1,6 @@
 ﻿using KURSACH_NOT_ANIMAL.Classes.DbClasses;
 using KURSACH_NOT_ANIMAL.Forms.Admin;
+using KURSACH_NOT_ANIMAL.Forms.Admin.ProductRes;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Shop;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Sklad;
 using KURSACH_NOT_ANIMAL.Forms.Reestr;
@@ -85,6 +86,19 @@ namespace KURSACH_NOT_ANIMAL.Forms
             ScheduleReestr scheduleReestr = new ScheduleReestr();
             this.Hide();
             scheduleReestr.ShowDialog();
+            this.Show();
+        }
+
+        private void MENU_ITEM_OPERATIONS_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MENU_ITEM_PRODUCTS_Click(object sender, EventArgs e)
+        {
+            ProductReestr productReestr = new ProductReestr();
+            this.Hide();
+            productReestr.ShowDialog();
             this.Show();
         }
     }

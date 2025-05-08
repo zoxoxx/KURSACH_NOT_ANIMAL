@@ -48,31 +48,28 @@
             // TB_PASSWORD
             // 
             TB_PASSWORD.Anchor = AnchorStyles.None;
-            TB_PASSWORD.Location = new Point(223, 144);
-            TB_PASSWORD.Margin = new Padding(4);
+            TB_PASSWORD.Location = new Point(178, 115);
             TB_PASSWORD.Name = "TB_PASSWORD";
             TB_PASSWORD.PlaceholderText = "Пароль";
-            TB_PASSWORD.Size = new Size(186, 31);
+            TB_PASSWORD.Size = new Size(150, 27);
             TB_PASSWORD.TabIndex = 30;
             // 
             // TB_LOGIN
             // 
             TB_LOGIN.Anchor = AnchorStyles.None;
-            TB_LOGIN.Location = new Point(223, 95);
-            TB_LOGIN.Margin = new Padding(4);
+            TB_LOGIN.Location = new Point(178, 76);
             TB_LOGIN.Name = "TB_LOGIN";
             TB_LOGIN.PlaceholderText = "Логин";
-            TB_LOGIN.Size = new Size(186, 31);
+            TB_LOGIN.Size = new Size(150, 27);
             TB_LOGIN.TabIndex = 28;
             // 
             // TB_PHONE
             // 
             TB_PHONE.Anchor = AnchorStyles.None;
-            TB_PHONE.Location = new Point(223, 194);
-            TB_PHONE.Margin = new Padding(4);
+            TB_PHONE.Location = new Point(178, 155);
             TB_PHONE.Name = "TB_PHONE";
             TB_PHONE.PlaceholderText = "Номер телефона";
-            TB_PHONE.Size = new Size(186, 31);
+            TB_PHONE.Size = new Size(150, 27);
             TB_PHONE.TabIndex = 25;
             TB_PHONE.TextChanged += TB_PHONE_TextChanged;
             TB_PHONE.KeyDown += TB_PHONE_KeyDown;
@@ -81,50 +78,45 @@
             // 
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
-            label4.Location = new Point(42, 235);
-            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Location = new Point(34, 188);
             label4.Name = "label4";
-            label4.Size = new Size(137, 25);
+            label4.Size = new Size(116, 20);
             label4.TabIndex = 24;
             label4.Text = "Дата рождения";
             // 
             // DATE_PICKER_BIRTHDAY
             // 
             DATE_PICKER_BIRTHDAY.Anchor = AnchorStyles.None;
-            DATE_PICKER_BIRTHDAY.Location = new Point(42, 264);
-            DATE_PICKER_BIRTHDAY.Margin = new Padding(4);
+            DATE_PICKER_BIRTHDAY.Location = new Point(34, 211);
             DATE_PICKER_BIRTHDAY.Name = "DATE_PICKER_BIRTHDAY";
-            DATE_PICKER_BIRTHDAY.Size = new Size(367, 31);
+            DATE_PICKER_BIRTHDAY.Size = new Size(294, 27);
             DATE_PICKER_BIRTHDAY.TabIndex = 23;
             // 
             // TB_PATRONYMIC
             // 
             TB_PATRONYMIC.Anchor = AnchorStyles.None;
-            TB_PATRONYMIC.Location = new Point(42, 194);
-            TB_PATRONYMIC.Margin = new Padding(4);
+            TB_PATRONYMIC.Location = new Point(34, 155);
             TB_PATRONYMIC.Name = "TB_PATRONYMIC";
             TB_PATRONYMIC.PlaceholderText = "Отчество";
-            TB_PATRONYMIC.Size = new Size(155, 31);
+            TB_PATRONYMIC.Size = new Size(125, 27);
             TB_PATRONYMIC.TabIndex = 22;
             // 
             // TB_NAME
             // 
             TB_NAME.Anchor = AnchorStyles.None;
-            TB_NAME.Location = new Point(42, 144);
-            TB_NAME.Margin = new Padding(4);
+            TB_NAME.Location = new Point(34, 115);
             TB_NAME.Name = "TB_NAME";
             TB_NAME.PlaceholderText = "Имя";
-            TB_NAME.Size = new Size(155, 31);
+            TB_NAME.Size = new Size(125, 27);
             TB_NAME.TabIndex = 21;
             // 
             // TB_LASTNAME
             // 
             TB_LASTNAME.Anchor = AnchorStyles.None;
-            TB_LASTNAME.Location = new Point(42, 95);
-            TB_LASTNAME.Margin = new Padding(4);
+            TB_LASTNAME.Location = new Point(34, 76);
             TB_LASTNAME.Name = "TB_LASTNAME";
             TB_LASTNAME.PlaceholderText = "Фамилия";
-            TB_LASTNAME.Size = new Size(155, 31);
+            TB_LASTNAME.Size = new Size(125, 27);
             TB_LASTNAME.TabIndex = 20;
             // 
             // BTN_ACTION
@@ -132,10 +124,9 @@
             BTN_ACTION.Anchor = AnchorStyles.None;
             BTN_ACTION.BackColor = SystemColors.ActiveBorder;
             BTN_ACTION.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            BTN_ACTION.Location = new Point(42, 410);
-            BTN_ACTION.Margin = new Padding(4);
+            BTN_ACTION.Location = new Point(34, 328);
             BTN_ACTION.Name = "BTN_ACTION";
-            BTN_ACTION.Size = new Size(367, 64);
+            BTN_ACTION.Size = new Size(294, 51);
             BTN_ACTION.TabIndex = 31;
             BTN_ACTION.Text = "Изменить/Добавить";
             BTN_ACTION.UseVisualStyleBackColor = false;
@@ -145,31 +136,28 @@
             // 
             CMB_ROLE.Anchor = AnchorStyles.None;
             CMB_ROLE.FormattingEnabled = true;
-            CMB_ROLE.Location = new Point(223, 337);
-            CMB_ROLE.Margin = new Padding(4);
+            CMB_ROLE.Location = new Point(178, 270);
             CMB_ROLE.Name = "CMB_ROLE";
-            CMB_ROLE.Size = new Size(186, 33);
+            CMB_ROLE.Size = new Size(150, 28);
             CMB_ROLE.TabIndex = 32;
             // 
             // label8
             // 
             label8.Anchor = AnchorStyles.None;
             label8.AutoSize = true;
-            label8.Location = new Point(223, 310);
-            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Location = new Point(178, 248);
             label8.Name = "label8";
-            label8.Size = new Size(51, 25);
+            label8.Size = new Size(42, 20);
             label8.TabIndex = 33;
             label8.Text = "Роль";
             // 
             // TB_BALANCE
             // 
             TB_BALANCE.Anchor = AnchorStyles.None;
-            TB_BALANCE.Location = new Point(42, 339);
-            TB_BALANCE.Margin = new Padding(4);
+            TB_BALANCE.Location = new Point(34, 271);
             TB_BALANCE.Name = "TB_BALANCE";
             TB_BALANCE.PlaceholderText = "Баланс";
-            TB_BALANCE.Size = new Size(155, 31);
+            TB_BALANCE.Size = new Size(125, 27);
             TB_BALANCE.TabIndex = 35;
             // 
             // panel1
@@ -189,9 +177,10 @@
             panel1.Controls.Add(TB_PASSWORD);
             panel1.Controls.Add(TB_PHONE);
             panel1.Controls.Add(TB_LOGIN);
-            panel1.Location = new Point(245, 24);
+            panel1.Location = new Point(196, 19);
+            panel1.Margin = new Padding(2, 2, 2, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(456, 508);
+            panel1.Size = new Size(365, 406);
             panel1.TabIndex = 36;
             // 
             // label1
@@ -199,21 +188,22 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 22F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            label1.Location = new Point(78, 13);
+            label1.Location = new Point(62, 10);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(304, 60);
+            label1.Size = new Size(260, 50);
             label1.TabIndex = 36;
             label1.Text = "Пользователь";
             // 
             // UserForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(978, 544);
+            ClientSize = new Size(786, 442);
             Controls.Add(panel1);
-            Margin = new Padding(4);
-            MinimumSize = new Size(1000, 600);
+            MinimumSize = new Size(804, 489);
             Name = "UserForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Пользователь";
             Load += UserForm_Load;
             panel1.ResumeLayout(false);
