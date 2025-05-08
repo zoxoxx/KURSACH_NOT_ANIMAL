@@ -1,5 +1,6 @@
 ﻿using KURSACH_NOT_ANIMAL.Classes.DbClasses;
 using KURSACH_NOT_ANIMAL.Forms.Admin;
+using KURSACH_NOT_ANIMAL.Forms.Admin.ProductRes;
 using KURSACH_NOT_ANIMAL.Forms.Admin.ScheduleRes;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Shop;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Sklad;
@@ -31,17 +32,11 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            if (UserFromDb.CheckRoleAcess(CurrentUser.Id, "Администратор"))
-                MENU_WORK.Visible = false;
-            else if (UserFromDb.CheckRoleAcess(CurrentUser.Id, "Продавец"))
-            {
+            if (!UserFromDb.CheckRoleAcess(CurrentUser.Id, "Администратор"))
                 MENU_ADMIN.Visible = false;
-            }
-            else if (UserFromDb.CheckRoleAcess(CurrentUser.Id, "Клиент"))
-            {
-                MENU_ADMIN.Visible = false;
+
+            if (!UserFromDb.CheckRoleAcess(CurrentUser.Id, "Продавец"))
                 MENU_WORK.Visible = false;
-            }
         }
 
         private void MENU_PROFILE_Click(object sender, EventArgs e)
@@ -93,6 +88,19 @@ namespace KURSACH_NOT_ANIMAL.Forms
             ScheduleReestr scheduleReestr = new ScheduleReestr();
             this.Hide();
             scheduleReestr.ShowDialog();
+            this.Show();
+        }
+
+        private void MENU_ITEM_OPERATIONS_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MENU_ITEM_PRODUCTS_Click(object sender, EventArgs e)
+        {
+            ProductReestr productReestr = new ProductReestr();
+            this.Hide();
+            productReestr.ShowDialog();
             this.Show();
         }
 

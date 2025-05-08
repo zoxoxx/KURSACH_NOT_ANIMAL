@@ -11,7 +11,7 @@ namespace KURSACH_NOT_ANIMAL.Classes.DbClasses
         public int Id { get; set; }
         public string Name { get; set; }
         public int CategoryId { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public Animal(int id, string name, int categoryId, string description)
         {
@@ -19,6 +19,12 @@ namespace KURSACH_NOT_ANIMAL.Classes.DbClasses
             Name = name;
             CategoryId = categoryId;
             Description = description;
+        }
+
+        public Animal(int Id, string Name)
+        {
+            this.Id = Id;
+            this.Name = Name;
         }
     }
 }

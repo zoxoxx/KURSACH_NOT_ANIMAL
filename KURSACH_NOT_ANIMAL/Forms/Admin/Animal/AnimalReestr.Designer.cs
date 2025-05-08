@@ -29,21 +29,22 @@
         private void InitializeComponent()
         {
             DG_ANIMALS = new DataGridView();
-            BTN_EDIT = new Button();
-            BTN_DELETE = new Button();
-            BTN_ADD = new Button();
             Id = new DataGridViewTextBoxColumn();
             NameAnimal = new DataGridViewTextBoxColumn();
             Description = new DataGridViewTextBoxColumn();
             CategoryName = new DataGridViewComboBoxColumn();
             CategoryDescription = new DataGridViewTextBoxColumn();
             CategoryId = new DataGridViewTextBoxColumn();
+            BTN_EDIT = new Button();
+            BTN_DELETE = new Button();
+            BTN_ADD = new Button();
             ((System.ComponentModel.ISupportInitialize)DG_ANIMALS).BeginInit();
             SuspendLayout();
             // 
             // DG_ANIMALS
             // 
             DG_ANIMALS.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            DG_ANIMALS.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DG_ANIMALS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_ANIMALS.Columns.AddRange(new DataGridViewColumn[] { Id, NameAnimal, Description, CategoryName, CategoryDescription, CategoryId });
             DG_ANIMALS.Location = new Point(12, 48);
@@ -53,6 +54,47 @@
             DG_ANIMALS.TabIndex = 0;
             DG_ANIMALS.CellBeginEdit += DG_ANIMALS_CellBeginEdit;
             DG_ANIMALS.CellValueChanged += DG_ANIMALS_CellValueChanged;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "Ключ животного";
+            Id.MinimumWidth = 6;
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Visible = false;
+            // 
+            // NameAnimal
+            // 
+            NameAnimal.HeaderText = "Наименование животного";
+            NameAnimal.MinimumWidth = 6;
+            NameAnimal.Name = "NameAnimal";
+            // 
+            // Description
+            // 
+            Description.HeaderText = "Описание животного";
+            Description.MinimumWidth = 6;
+            Description.Name = "Description";
+            // 
+            // CategoryName
+            // 
+            CategoryName.HeaderText = "Категория";
+            CategoryName.MinimumWidth = 6;
+            CategoryName.Name = "CategoryName";
+            // 
+            // CategoryDescription
+            // 
+            CategoryDescription.HeaderText = "Описание категории";
+            CategoryDescription.MinimumWidth = 6;
+            CategoryDescription.Name = "CategoryDescription";
+            CategoryDescription.Resizable = DataGridViewTriState.True;
+            CategoryDescription.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // CategoryId
+            // 
+            CategoryId.HeaderText = "Ключ категории";
+            CategoryId.MinimumWidth = 6;
+            CategoryId.Name = "CategoryId";
+            CategoryId.Visible = false;
             // 
             // BTN_EDIT
             // 
@@ -98,53 +140,6 @@
             BTN_ADD.TextImageRelation = TextImageRelation.TextBeforeImage;
             BTN_ADD.UseVisualStyleBackColor = true;
             BTN_ADD.Click += BTN_ADD_Click;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "Ключ животного";
-            Id.MinimumWidth = 6;
-            Id.Name = "Id";
-            Id.ReadOnly = true;
-            Id.Visible = false;
-            Id.Width = 125;
-            // 
-            // NameAnimal
-            // 
-            NameAnimal.HeaderText = "Наименование животного";
-            NameAnimal.MinimumWidth = 6;
-            NameAnimal.Name = "NameAnimal";
-            NameAnimal.Width = 150;
-            // 
-            // Description
-            // 
-            Description.HeaderText = "Описание животного";
-            Description.MinimumWidth = 6;
-            Description.Name = "Description";
-            Description.Width = 200;
-            // 
-            // CategoryName
-            // 
-            CategoryName.HeaderText = "Категория";
-            CategoryName.MinimumWidth = 6;
-            CategoryName.Name = "CategoryName";
-            CategoryName.Width = 150;
-            // 
-            // CategoryDescription
-            // 
-            CategoryDescription.HeaderText = "Описание категории";
-            CategoryDescription.MinimumWidth = 6;
-            CategoryDescription.Name = "CategoryDescription";
-            CategoryDescription.Resizable = DataGridViewTriState.True;
-            CategoryDescription.SortMode = DataGridViewColumnSortMode.NotSortable;
-            CategoryDescription.Width = 200;
-            // 
-            // CategoryId
-            // 
-            CategoryId.HeaderText = "Ключ категории";
-            CategoryId.MinimumWidth = 6;
-            CategoryId.Name = "CategoryId";
-            CategoryId.Visible = false;
-            CategoryId.Width = 125;
             // 
             // AnimalReestr
             // 

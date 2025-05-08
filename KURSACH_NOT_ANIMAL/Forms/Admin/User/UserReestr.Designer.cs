@@ -47,6 +47,7 @@
             // 
             DG_USERS.AllowUserToAddRows = false;
             DG_USERS.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            DG_USERS.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DG_USERS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_USERS.Columns.AddRange(new DataGridViewColumn[] { UserId, Phyo, RoleId, RoleName, Birthday, Phone, Balance, Login, Password });
             DG_USERS.Location = new Point(6, 44);
@@ -64,7 +65,6 @@
             UserId.Name = "UserId";
             UserId.ReadOnly = true;
             UserId.Visible = false;
-            UserId.Width = 125;
             // 
             // Phyo
             // 
@@ -72,7 +72,6 @@
             Phyo.MinimumWidth = 6;
             Phyo.Name = "Phyo";
             Phyo.ReadOnly = true;
-            Phyo.Width = 125;
             // 
             // RoleId
             // 
@@ -81,7 +80,6 @@
             RoleId.Name = "RoleId";
             RoleId.ReadOnly = true;
             RoleId.Visible = false;
-            RoleId.Width = 125;
             // 
             // RoleName
             // 
@@ -89,7 +87,6 @@
             RoleName.MinimumWidth = 6;
             RoleName.Name = "RoleName";
             RoleName.ReadOnly = true;
-            RoleName.Width = 125;
             // 
             // Birthday
             // 
@@ -97,7 +94,6 @@
             Birthday.MinimumWidth = 6;
             Birthday.Name = "Birthday";
             Birthday.ReadOnly = true;
-            Birthday.Width = 125;
             // 
             // Phone
             // 
@@ -105,7 +101,6 @@
             Phone.MinimumWidth = 6;
             Phone.Name = "Phone";
             Phone.ReadOnly = true;
-            Phone.Width = 125;
             // 
             // Balance
             // 
@@ -113,7 +108,6 @@
             Balance.MinimumWidth = 6;
             Balance.Name = "Balance";
             Balance.ReadOnly = true;
-            Balance.Width = 125;
             // 
             // Login
             // 
@@ -121,7 +115,6 @@
             Login.MinimumWidth = 6;
             Login.Name = "Login";
             Login.ReadOnly = true;
-            Login.Width = 125;
             // 
             // Password
             // 
@@ -129,7 +122,6 @@
             Password.MinimumWidth = 6;
             Password.Name = "Password";
             Password.ReadOnly = true;
-            Password.Width = 110;
             // 
             // BTN_ADD
             // 
@@ -170,6 +162,7 @@
             Controls.Add(BTN_ADD);
             Controls.Add(DG_USERS);
             Name = "UserReestr";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Пользватели";
             Load += UserReestr_Load;
             ((System.ComponentModel.ISupportInitialize)DG_USERS).EndInit();

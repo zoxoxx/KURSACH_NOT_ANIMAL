@@ -1,5 +1,8 @@
 ﻿using KURSACH_NOT_ANIMAL.Classes.DbClasses;
+using KURSACH_NOT_ANIMAL.Classes.SystemClasses;
 using KURSACH_NOT_ANIMAL.Classes.ViewClasses;
+using KURSACH_NOT_ANIMAL.Forms.Admin.Sklad;
+using KURSACH_NOT_ANIMAL.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,8 +18,6 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.ProductRes
     public partial class ProductReestr : Form
     {
         List<ProductView>? products;
-        List<CategoryProduct>? categories = new List<CategoryProduct>();
-        private int editableRowIndex = -1;
         public ProductReestr()
         {
             InitializeComponent();
@@ -30,11 +31,60 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.ProductRes
             DG_PRODUCTS.Columns[6].DataPropertyName = "Commentary";
             DG_PRODUCTS.Columns[7].DataPropertyName = "CategoryId";
 
-            DG_PRODUCTS.AllowUserToAddRows = false;
-            DG_PRODUCTS.EditMode = DataGridViewEditMode.EditOnEnter;
             DG_PRODUCTS.AutoGenerateColumns = false;
         }
 
+        private void ProductReestr_Load(object sender, EventArgs e)
+        {
+            DataGridLoad();
+        }
 
+        private void DataGridLoad()
+        {
+            products = ProductFromDb.GetProductsWithCategory();
+            DG_PRODUCTS.DataSource = products;
+        }
+
+        private void BTN_ADD_Click(object sender, EventArgs e)
+        {
+            ProductForm productForm = new ProductForm(flagInsert: true);
+            this.Hide();
+            productForm.ShowDialog();
+            this.Show();
+
+            DataGridLoad();
+        }
+
+        private void BTN_DELETE_Click(object sender, EventArgs e)
+        {
+            ProductView? selectedProduct = DG_PRODUCTS.CurrentRow.DataBoundItem as ProductView;
+
+            if (selectedProduct is null)
+                return;
+
+            bool result;
+            result = ProductFromDb.DeleteRecomendationsForProduct(selectedProduct.Id);
+            result = ProductFromDb.DeleteProduct(selectedProduct.Id);
+
+            if (result)
+                Logger.Log($"Был удален продукт из справочника с наименованием: '{selectedProduct.Name}', пользователем {MainForm.CurrentUser.PHYO?? "Тестовый пользователь"}.");
+
+            DataGridLoad();
+        }
+
+        private void DG_PRODUCTS_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ProductView? selectedProduct = DG_PRODUCTS.CurrentRow.DataBoundItem as ProductView;
+
+            if (selectedProduct is null)
+                return;
+
+            ProductForm productForm = new ProductForm(flagUpdate: true, product: selectedProduct);
+            this.Hide();
+            productForm.ShowDialog();
+            this.Show();
+
+            DataGridLoad();
+        }
     }
 }
