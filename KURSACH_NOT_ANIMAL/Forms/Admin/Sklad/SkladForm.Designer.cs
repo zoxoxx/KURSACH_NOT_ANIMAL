@@ -171,6 +171,7 @@
             Controls.Add(label1);
             Controls.Add(BTN_ACTION);
             Name = "SkladForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Закупка";
             Load += SkladForm_Load;
             ResumeLayout(false);

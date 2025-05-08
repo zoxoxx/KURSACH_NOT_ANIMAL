@@ -73,6 +73,7 @@
             MENU_ITEM_PRODUCTS.Name = "MENU_ITEM_PRODUCTS";
             MENU_ITEM_PRODUCTS.Size = new Size(247, 34);
             MENU_ITEM_PRODUCTS.Text = "Товары";
+            MENU_ITEM_PRODUCTS.Click += MENU_ITEM_PRODUCTS_Click;
             // 
             // MENU_ITEM_ANIMALS
             // 
@@ -121,6 +122,7 @@
             MENU_ITEM_OPERATIONS.Name = "MENU_ITEM_OPERATIONS";
             MENU_ITEM_OPERATIONS.Size = new Size(191, 34);
             MENU_ITEM_OPERATIONS.Text = "Продажи";
+            MENU_ITEM_OPERATIONS.Click += MENU_ITEM_OPERATIONS_Click;
             // 
             // MENU_PROFILE
             // 

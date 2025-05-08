@@ -74,6 +74,7 @@
             DG_SHOPS.AllowUserToAddRows = false;
             DG_SHOPS.AllowUserToDeleteRows = false;
             DG_SHOPS.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            DG_SHOPS.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DG_SHOPS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_SHOPS.Columns.AddRange(new DataGridViewColumn[] { ShopId, ShopName, Adress, CityId, CityName });
             DG_SHOPS.Location = new Point(12, 51);
@@ -91,7 +92,6 @@
             ShopId.Name = "ShopId";
             ShopId.ReadOnly = true;
             ShopId.Visible = false;
-            ShopId.Width = 125;
             // 
             // ShopName
             // 
@@ -99,7 +99,6 @@
             ShopName.MinimumWidth = 6;
             ShopName.Name = "ShopName";
             ShopName.ReadOnly = true;
-            ShopName.Width = 200;
             // 
             // Adress
             // 
@@ -107,7 +106,6 @@
             Adress.MinimumWidth = 6;
             Adress.Name = "Adress";
             Adress.ReadOnly = true;
-            Adress.Width = 250;
             // 
             // CityId
             // 
@@ -116,7 +114,6 @@
             CityId.Name = "CityId";
             CityId.ReadOnly = true;
             CityId.Visible = false;
-            CityId.Width = 125;
             // 
             // CityName
             // 
@@ -124,7 +121,6 @@
             CityName.MinimumWidth = 6;
             CityName.Name = "CityName";
             CityName.ReadOnly = true;
-            CityName.Width = 150;
             // 
             // ShopReestr
             // 
@@ -135,6 +131,7 @@
             Controls.Add(BTN_DELETE);
             Controls.Add(DG_SHOPS);
             Name = "ShopReestr";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Магазины";
             Load += ShopReestr_Load;
             ((System.ComponentModel.ISupportInitialize)DG_SHOPS).EndInit();

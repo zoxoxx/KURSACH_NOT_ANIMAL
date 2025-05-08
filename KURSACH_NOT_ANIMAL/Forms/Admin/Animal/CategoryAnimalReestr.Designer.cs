@@ -40,6 +40,7 @@
             DG_CATEGORIES.AllowUserToAddRows = false;
             DG_CATEGORIES.AllowUserToDeleteRows = false;
             DG_CATEGORIES.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            DG_CATEGORIES.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DG_CATEGORIES.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_CATEGORIES.Columns.AddRange(new DataGridViewColumn[] { CategoryId, CategoryName, CategoryDescription });
             DG_CATEGORIES.Location = new Point(3, 2);
@@ -57,7 +58,6 @@
             CategoryId.Name = "CategoryId";
             CategoryId.ReadOnly = true;
             CategoryId.Visible = false;
-            CategoryId.Width = 125;
             // 
             // CategoryName
             // 
@@ -65,7 +65,6 @@
             CategoryName.MinimumWidth = 6;
             CategoryName.Name = "CategoryName";
             CategoryName.ReadOnly = true;
-            CategoryName.Width = 275;
             // 
             // CategoryDescription
             // 
@@ -73,7 +72,6 @@
             CategoryDescription.MinimumWidth = 6;
             CategoryDescription.Name = "CategoryDescription";
             CategoryDescription.ReadOnly = true;
-            CategoryDescription.Width = 450;
             // 
             // CategoryAnimalReestr
             // 
