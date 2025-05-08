@@ -7,6 +7,7 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -188,6 +189,7 @@ namespace KURSACH_NOT_ANIMAL.Model
                     cmd.Parameters.AddWithValue("Login", changedUser.Login);
                     cmd.Parameters.AddWithValue("Password", changedUser.Password);
                     cmd.Parameters.AddWithValue("Id", changedUser.Id);
+                    cmd.Parameters.AddWithValue("Balance", changedUser.Balance);
                     int resultQuery = cmd.ExecuteNonQuery();
 
                 }
@@ -283,20 +285,36 @@ namespace KURSACH_NOT_ANIMAL.Model
                 {
                     connection.Open();
 
-                    string sqlExp = "delete from USER_SYSTEM " +
-                        "where ID = @UserId";
-                    NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
-                    cmd.Parameters.AddWithValue("UserId", userId);
+                    string sqlExp = "delete " +
+                        "from SCHEDULE " +
+                        "where USER_ID = @UserId";
 
-                    int resultQuery = cmd.ExecuteNonQuery();
+                    NpgsqlCommand cmd1 = new NpgsqlCommand(sqlExp, connection);
+                    cmd1.Parameters.AddWithValue("UserId", userId);
+
+                    int resultQuery = cmd1.ExecuteNonQuery();
+
+                    sqlExp = "delete from USER_SYSTEM " +
+                        "where ID = @UserId";
+
+                    NpgsqlCommand cmd2 = new NpgsqlCommand(sqlExp, connection);
+                    cmd2.Parameters.AddWithValue("UserId", userId);
+
+                    resultQuery = cmd2.ExecuteNonQuery();
+
                 }
             }
 
             catch(NpgsqlException ex)
             {
-                Debug.WriteLine(ex.Message);
-                MessageBox.Show("Было вызвано исключение при удалении пользователя пользователя,\n" +
-                    "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.ErrorCode == -2147467259)
+                    MessageBox.Show("Данного пользователя нельзя удалить, так как он связан с операцией.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    Debug.WriteLine(ex.Message);
+                    MessageBox.Show("Было вызвано исключение при удалении пользователя пользователя,\n" +
+                        "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
                 return false;
             }

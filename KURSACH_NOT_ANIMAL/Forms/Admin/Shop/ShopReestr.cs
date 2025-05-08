@@ -35,6 +35,12 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Shop
 
         private void ShopReestr_Load(object sender, EventArgs e)
         {
+            if (flagPartner == true)
+                this.Text += "Магазины партнеров";
+
+            if (flagShop == true)
+                this.Text = "Наши магазины";
+
             DataGridLoad();
         }
 
