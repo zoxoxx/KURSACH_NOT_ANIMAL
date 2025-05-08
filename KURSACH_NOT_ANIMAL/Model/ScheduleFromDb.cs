@@ -1,6 +1,7 @@
 ﻿using KURSACH_NOT_ANIMAL.Classes.DbClasses;
 using KURSACH_NOT_ANIMAL.Classes.ViewClasses;
 using KURSACH_NOT_ANIMAL.Models;
+using Microsoft.VisualBasic.ApplicationServices;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -212,6 +213,46 @@ namespace KURSACH_NOT_ANIMAL.Model
             }
 
             return true;
+        }
+
+        public static bool CheckWorktime(int userId)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(ConnectionStr.connectionString))
+                {
+                    connection.Open();
+
+                    var currentDate = DateOnly.FromDateTime(DateTime.Now);
+                    var currentTime = TimeOnly.FromDateTime(DateTime.Now);
+
+                    string sqlExp = @"
+                    SELECT EXISTS (
+                        SELECT 1 FROM SCHEDULE 
+                        WHERE USER_ID = @UserId 
+                        AND DATE_JOB = @CurrentDate
+                        AND TIME_START::time <= @CurrentTime
+                        AND TIME_END::time >= @CurrentTime
+                    )";
+
+                    using (var cmd = new NpgsqlCommand(sqlExp, connection))
+                    {
+                        cmd.Parameters.AddWithValue("UserId", userId);
+                        cmd.Parameters.AddWithValue("CurrentDate", currentDate);
+                        cmd.Parameters.AddWithValue("CurrentTime", currentTime.ToTimeSpan());
+
+                        bool isWorkingTime = (bool)cmd.ExecuteScalar();
+                        return isWorkingTime;
+                    }
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show($"Ошибка при проверке рабочего времени: {ex.Message}",
+                              "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
     }
 }

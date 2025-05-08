@@ -5,6 +5,7 @@ using KURSACH_NOT_ANIMAL.Forms.Admin.Shop;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Sklad;
 using KURSACH_NOT_ANIMAL.Forms.Reestr;
 using KURSACH_NOT_ANIMAL.Model;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,11 +31,17 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            if (!UserFromDb.CheckRoleAcess(CurrentUser.Id, "Администратор"))
-                MENU_ADMIN.Visible = false;
-
-            if (!UserFromDb.CheckRoleAcess(CurrentUser.Id, "Продавец"))
+            if (UserFromDb.CheckRoleAcess(CurrentUser.Id, "Администратор"))
                 MENU_WORK.Visible = false;
+            else if (UserFromDb.CheckRoleAcess(CurrentUser.Id, "Продавец"))
+            {
+                MENU_ADMIN.Visible = false;
+            }
+            else if (UserFromDb.CheckRoleAcess(CurrentUser.Id, "Клиент"))
+            {
+                MENU_ADMIN.Visible = false;
+                MENU_WORK.Visible = false;
+            }
         }
 
         private void MENU_PROFILE_Click(object sender, EventArgs e)
@@ -87,6 +94,15 @@ namespace KURSACH_NOT_ANIMAL.Forms
             this.Hide();
             scheduleReestr.ShowDialog();
             this.Show();
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            if (UserFromDb.CheckRoleAcess(CurrentUser.Id, "Продавец"))
+            {
+                if (!ScheduleFromDb.CheckWorktime(CurrentUser.Id))
+                    MessageBox.Show("Сейчас нерабочее время. Оно будет засчитано как переработка", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
