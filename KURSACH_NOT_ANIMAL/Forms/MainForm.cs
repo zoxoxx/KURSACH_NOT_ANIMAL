@@ -111,6 +111,8 @@ namespace KURSACH_NOT_ANIMAL.Forms
             this.Hide();
             productReestr.ShowDialog();
             this.Show();
+
+            DataGridLoad();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -124,6 +126,9 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
         private void DG_PRODUCTS_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (UserFromDb.CheckRoleAcess(CurrentUser.Id, "Клиент"))
+                return;
+
             ProductView? selectedProduct = DG_PRODUCTS.CurrentRow.DataBoundItem as ProductView;
 
             if (selectedProduct is null)
@@ -141,6 +146,18 @@ namespace KURSACH_NOT_ANIMAL.Forms
         {
             products = ProductFromDb.GetProductsWithCategory();
             DG_PRODUCTS.DataSource = products;
+        }
+
+        private void TB_SEARCH_TextChanged(object sender, EventArgs e)
+        {
+            if (TB_SEARCH.Text.Trim() == "")
+            {
+                DataGridLoad();
+                return;
+            }
+
+            string filter = TB_SEARCH.Text;
+            
         }
     }
 }

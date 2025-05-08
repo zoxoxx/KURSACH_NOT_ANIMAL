@@ -1,4 +1,5 @@
 ﻿using KURSACH_NOT_ANIMAL.Classes.ViewClasses;
+using KURSACH_NOT_ANIMAL.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,18 +33,25 @@ namespace KURSACH_NOT_ANIMAL.Forms.Client.OperationRes
             }
 
             int finalPrice;
-            if (TB_FINAL_PRICE is null || int.TryParse(TB_FINAL_PRICE.Text, out finalPrice) || finalPrice <= 0)
+            if (TB_FINAL_PRICE.Text is null || !int.TryParse(TB_FINAL_PRICE.Text, out finalPrice) || finalPrice <= 0)
             {
                 MessageBox.Show("Итоговая цена должна быть больше 0.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            bool result = OperationFromDb.AddOperation(Convert.ToInt32(TB_FINAL_PRICE.Text), MainForm.CurrentUser.Id, product.Id, Convert.ToInt32(TB_COUNT.Text));
+
+            if (result)
+                MessageBox.Show("Заявка успешно оставлена.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            this.Close();
         }
 
         private void OperationForm_Load(object sender, EventArgs e)
         {
-            TB_PRICE.Text = product.Price.ToString();
-            TB_WEIGHT.Text = product.Weight.ToString();
-            TB_NAME.Text = product.Name;
+            LBL_PRICE.Text = product.Price.ToString();
+            LBL_WEIGHT.Text = product.Weight.ToString();
+            LBL_NAME.Text = product.Name;
             TB_DESCRIPTION.Text = product.Description?? "";
         }
 

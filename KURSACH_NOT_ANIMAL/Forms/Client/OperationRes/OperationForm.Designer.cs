@@ -29,11 +29,8 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            TB_NAME = new TextBox();
             label2 = new Label();
-            TB_WEIGHT = new TextBox();
             label3 = new Label();
-            TB_PRICE = new TextBox();
             label4 = new Label();
             TB_DESCRIPTION = new TextBox();
             label5 = new Label();
@@ -41,6 +38,9 @@
             label6 = new Label();
             TB_COUNT = new TextBox();
             BTN_CREATE_OPERATION = new Button();
+            LBL_NAME = new Label();
+            LBL_PRICE = new Label();
+            LBL_WEIGHT = new Label();
             SuspendLayout();
             // 
             // label1
@@ -52,14 +52,6 @@
             label1.TabIndex = 0;
             label1.Text = "Наименование товара";
             // 
-            // TB_NAME
-            // 
-            TB_NAME.Enabled = false;
-            TB_NAME.Location = new Point(198, 23);
-            TB_NAME.Name = "TB_NAME";
-            TB_NAME.Size = new Size(190, 27);
-            TB_NAME.TabIndex = 1;
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -69,14 +61,6 @@
             label2.TabIndex = 2;
             label2.Text = "Вес";
             // 
-            // TB_WEIGHT
-            // 
-            TB_WEIGHT.Enabled = false;
-            TB_WEIGHT.Location = new Point(455, 77);
-            TB_WEIGHT.Name = "TB_WEIGHT";
-            TB_WEIGHT.Size = new Size(125, 27);
-            TB_WEIGHT.TabIndex = 3;
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -85,14 +69,6 @@
             label3.Size = new Size(45, 20);
             label3.TabIndex = 4;
             label3.Text = "Цена";
-            // 
-            // TB_PRICE
-            // 
-            TB_PRICE.Enabled = false;
-            TB_PRICE.Location = new Point(455, 24);
-            TB_PRICE.Name = "TB_PRICE";
-            TB_PRICE.Size = new Size(125, 27);
-            TB_PRICE.TabIndex = 5;
             // 
             // label4
             // 
@@ -105,10 +81,10 @@
             // 
             // TB_DESCRIPTION
             // 
-            TB_DESCRIPTION.Enabled = false;
             TB_DESCRIPTION.Location = new Point(198, 83);
             TB_DESCRIPTION.Multiline = true;
             TB_DESCRIPTION.Name = "TB_DESCRIPTION";
+            TB_DESCRIPTION.ReadOnly = true;
             TB_DESCRIPTION.Size = new Size(190, 133);
             TB_DESCRIPTION.TabIndex = 7;
             // 
@@ -123,9 +99,9 @@
             // 
             // TB_FINAL_PRICE
             // 
-            TB_FINAL_PRICE.Enabled = false;
             TB_FINAL_PRICE.Location = new Point(349, 307);
             TB_FINAL_PRICE.Name = "TB_FINAL_PRICE";
+            TB_FINAL_PRICE.ReadOnly = true;
             TB_FINAL_PRICE.Size = new Size(125, 27);
             TB_FINAL_PRICE.TabIndex = 9;
             // 
@@ -159,11 +135,41 @@
             BTN_CREATE_OPERATION.UseVisualStyleBackColor = false;
             BTN_CREATE_OPERATION.Click += BTN_CREATE_OPERATION_Click;
             // 
+            // LBL_NAME
+            // 
+            LBL_NAME.AutoSize = true;
+            LBL_NAME.Location = new Point(198, 25);
+            LBL_NAME.Name = "LBL_NAME";
+            LBL_NAME.Size = new Size(116, 20);
+            LBL_NAME.TabIndex = 13;
+            LBL_NAME.Text = "Наименование";
+            // 
+            // LBL_PRICE
+            // 
+            LBL_PRICE.AutoSize = true;
+            LBL_PRICE.Location = new Point(461, 28);
+            LBL_PRICE.Name = "LBL_PRICE";
+            LBL_PRICE.Size = new Size(76, 20);
+            LBL_PRICE.TabIndex = 14;
+            LBL_PRICE.Text = "Значение";
+            // 
+            // LBL_WEIGHT
+            // 
+            LBL_WEIGHT.AutoSize = true;
+            LBL_WEIGHT.Location = new Point(458, 81);
+            LBL_WEIGHT.Name = "LBL_WEIGHT";
+            LBL_WEIGHT.Size = new Size(76, 20);
+            LBL_WEIGHT.TabIndex = 15;
+            LBL_WEIGHT.Text = "Значение";
+            // 
             // OperationForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(LBL_WEIGHT);
+            Controls.Add(LBL_PRICE);
+            Controls.Add(LBL_NAME);
             Controls.Add(BTN_CREATE_OPERATION);
             Controls.Add(TB_COUNT);
             Controls.Add(label6);
@@ -171,13 +177,11 @@
             Controls.Add(label5);
             Controls.Add(TB_DESCRIPTION);
             Controls.Add(label4);
-            Controls.Add(TB_PRICE);
             Controls.Add(label3);
-            Controls.Add(TB_WEIGHT);
             Controls.Add(label2);
-            Controls.Add(TB_NAME);
             Controls.Add(label1);
             Name = "OperationForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Новая заявка";
             Load += OperationForm_Load;
             ResumeLayout(false);
@@ -187,11 +191,8 @@
         #endregion
 
         private Label label1;
-        private TextBox TB_NAME;
         private Label label2;
-        private TextBox TB_WEIGHT;
         private Label label3;
-        private TextBox TB_PRICE;
         private Label label4;
         private TextBox TB_DESCRIPTION;
         private Label label5;
@@ -199,5 +200,8 @@
         private Label label6;
         private TextBox TB_COUNT;
         private Button BTN_CREATE_OPERATION;
+        private Label LBL_NAME;
+        private Label LBL_PRICE;
+        private Label LBL_WEIGHT;
     }
 }
