@@ -15,7 +15,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.ScheduleRes
 {
     public partial class ScheduleReestr : Form
     {
-        List<ScheduleView> schedule = new List<ScheduleView>();
+        List<ScheduleView>? schedule = new List<ScheduleView>();
         private readonly ScheduleForm scheduleForm = new ScheduleForm();
         public ScheduleReestr()
         {

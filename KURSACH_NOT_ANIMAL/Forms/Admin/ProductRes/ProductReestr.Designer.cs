@@ -85,6 +85,7 @@
             DG_PRODUCTS.Name = "DG_PRODUCTS";
             DG_PRODUCTS.ReadOnly = true;
             DG_PRODUCTS.RowHeadersWidth = 62;
+            DG_PRODUCTS.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DG_PRODUCTS.Size = new Size(763, 374);
             DG_PRODUCTS.TabIndex = 7;
             DG_PRODUCTS.CellContentDoubleClick += DG_PRODUCTS_CellContentDoubleClick;
