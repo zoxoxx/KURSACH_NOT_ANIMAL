@@ -48,7 +48,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Operations
 
         private void DataGridLoad()
         {
-            operations = OperationsFromDb.GetOperations();
+            operations = OperationFromDb.GetOperations();
             DG_OPERATIONS.DataSource = operations;
         }
 
@@ -79,7 +79,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Operations
 
             DisableActionButtons(e.RowIndex);
 
-            OperationsFromDb.UpdateOperation(operation.Id);
+            OperationFromDb.UpdateOperation(operation);
         }
 
         private void DisableActionButtons(int rowIndex)
