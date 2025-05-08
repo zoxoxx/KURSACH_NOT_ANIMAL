@@ -1,9 +1,11 @@
 ﻿using KURSACH_NOT_ANIMAL.Classes.DbClasses;
+using KURSACH_NOT_ANIMAL.Classes.ViewClasses;
 using KURSACH_NOT_ANIMAL.Forms.Admin;
 using KURSACH_NOT_ANIMAL.Forms.Admin.ProductRes;
 using KURSACH_NOT_ANIMAL.Forms.Admin.ScheduleRes;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Shop;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Sklad;
+using KURSACH_NOT_ANIMAL.Forms.Client.OperationRes;
 using KURSACH_NOT_ANIMAL.Forms.Reestr;
 using KURSACH_NOT_ANIMAL.Model;
 using Microsoft.VisualBasic.ApplicationServices;
@@ -23,11 +25,24 @@ namespace KURSACH_NOT_ANIMAL.Forms
     public partial class MainForm : Form
     {
         public static UserSystem CurrentUser { get; set; } = default!;
+        List<ProductView>? products;
 
         public MainForm(UserSystem currentUser)
         {
             CurrentUser = currentUser;
+
             InitializeComponent();
+
+            DG_PRODUCTS.Columns[0].DataPropertyName = "Id";
+            DG_PRODUCTS.Columns[1].DataPropertyName = "Name";
+            DG_PRODUCTS.Columns[2].DataPropertyName = "Weight";
+            DG_PRODUCTS.Columns[3].DataPropertyName = "Price";
+            DG_PRODUCTS.Columns[4].DataPropertyName = "CategoryName";
+            DG_PRODUCTS.Columns[5].DataPropertyName = "Description";
+            DG_PRODUCTS.Columns[6].DataPropertyName = "Commentary";
+            DG_PRODUCTS.Columns[7].DataPropertyName = "CategoryId";
+
+            DG_PRODUCTS.AutoGenerateColumns = false;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -37,6 +52,8 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
             if (!UserFromDb.CheckRoleAcess(CurrentUser.Id, "Продавец"))
                 MENU_WORK.Visible = false;
+
+            DataGridLoad();
         }
 
         private void MENU_PROFILE_Click(object sender, EventArgs e)
@@ -103,6 +120,27 @@ namespace KURSACH_NOT_ANIMAL.Forms
                 if (!ScheduleFromDb.CheckWorktime(CurrentUser.Id))
                     MessageBox.Show("Сейчас нерабочее время. Оно будет засчитано как переработка", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void DG_PRODUCTS_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ProductView? selectedProduct = DG_PRODUCTS.CurrentRow.DataBoundItem as ProductView;
+
+            if (selectedProduct is null)
+                return;
+
+            OperationForm operationForm = new OperationForm(selectedProduct);
+            this.Hide();
+            operationForm.ShowDialog();
+            this.Show();
+
+            DataGridLoad();
+        }
+
+        private void DataGridLoad()
+        {
+            products = ProductFromDb.GetProductsWithCategory();
+            DG_PRODUCTS.DataSource = products;
         }
     }
 }
