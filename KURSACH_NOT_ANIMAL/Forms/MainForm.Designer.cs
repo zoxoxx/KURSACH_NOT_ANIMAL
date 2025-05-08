@@ -49,7 +49,8 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { MENU_ADMIN, MENU_WORK, MENU_PROFILE });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 28);
+            menuStrip1.Padding = new Padding(8, 2, 0, 2);
+            menuStrip1.Size = new Size(1000, 33);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -57,48 +58,48 @@
             // 
             MENU_ADMIN.DropDownItems.AddRange(new ToolStripItem[] { MENU_ITEM_USERS, MENU_ITEM_PRODUCTS, MENU_ITEM_ANIMALS, MENU_ITEM_PARTNERS, MENU_ITEM_SHOPS, MENU_ITEM_SCHEDULE });
             MENU_ADMIN.Name = "MENU_ADMIN";
-            MENU_ADMIN.Size = new Size(133, 24);
+            MENU_ADMIN.Size = new Size(157, 29);
             MENU_ADMIN.Text = "Администратор";
             // 
             // MENU_ITEM_USERS
             // 
             MENU_ITEM_USERS.Name = "MENU_ITEM_USERS";
-            MENU_ITEM_USERS.Size = new Size(205, 26);
+            MENU_ITEM_USERS.Size = new Size(247, 34);
             MENU_ITEM_USERS.Text = "Пользователи";
             MENU_ITEM_USERS.Click += MENU_ITEM_USERS_Click;
             // 
             // MENU_ITEM_PRODUCTS
             // 
             MENU_ITEM_PRODUCTS.Name = "MENU_ITEM_PRODUCTS";
-            MENU_ITEM_PRODUCTS.Size = new Size(224, 26);
+            MENU_ITEM_PRODUCTS.Size = new Size(247, 34);
             MENU_ITEM_PRODUCTS.Text = "Товары";
             MENU_ITEM_PRODUCTS.Click += MENU_ITEM_PRODUCTS_Click;
             // 
             // MENU_ITEM_ANIMALS
             // 
             MENU_ITEM_ANIMALS.Name = "MENU_ITEM_ANIMALS";
-            MENU_ITEM_ANIMALS.Size = new Size(205, 26);
+            MENU_ITEM_ANIMALS.Size = new Size(247, 34);
             MENU_ITEM_ANIMALS.Text = "Животные";
             MENU_ITEM_ANIMALS.Click += MENU_ITEM_ANIMALS_Click;
             // 
             // MENU_ITEM_PARTNERS
             // 
             MENU_ITEM_PARTNERS.Name = "MENU_ITEM_PARTNERS";
-            MENU_ITEM_PARTNERS.Size = new Size(205, 26);
+            MENU_ITEM_PARTNERS.Size = new Size(247, 34);
             MENU_ITEM_PARTNERS.Text = "Партнеры";
             MENU_ITEM_PARTNERS.Click += MENU_ITEM_PARTNERS_Click;
             // 
             // MENU_ITEM_SHOPS
             // 
             MENU_ITEM_SHOPS.Name = "MENU_ITEM_SHOPS";
-            MENU_ITEM_SHOPS.Size = new Size(205, 26);
+            MENU_ITEM_SHOPS.Size = new Size(247, 34);
             MENU_ITEM_SHOPS.Text = "Магазины";
             MENU_ITEM_SHOPS.Click += MENU_ITEM_SHOPS_Click;
             // 
             // MENU_ITEM_SCHEDULE
             // 
             MENU_ITEM_SCHEDULE.Name = "MENU_ITEM_SCHEDULE";
-            MENU_ITEM_SCHEDULE.Size = new Size(205, 26);
+            MENU_ITEM_SCHEDULE.Size = new Size(247, 34);
             MENU_ITEM_SCHEDULE.Text = "Рабочий график";
             MENU_ITEM_SCHEDULE.Click += MENU_ITEM_SCHEDULE_Click;
             // 
@@ -106,42 +107,44 @@
             // 
             MENU_WORK.DropDownItems.AddRange(new ToolStripItem[] { MENU_ITEM_SKLAD, MENU_ITEM_OPERATIONS });
             MENU_WORK.Name = "MENU_WORK";
-            MENU_WORK.Size = new Size(146, 24);
+            MENU_WORK.Size = new Size(173, 29);
             MENU_WORK.Text = "Рабочая нагрузка";
             // 
             // MENU_ITEM_SKLAD
             // 
             MENU_ITEM_SKLAD.Name = "MENU_ITEM_SKLAD";
-            MENU_ITEM_SKLAD.Size = new Size(224, 26);
+            MENU_ITEM_SKLAD.Size = new Size(191, 34);
             MENU_ITEM_SKLAD.Text = "Закупки";
             MENU_ITEM_SKLAD.Click += MENU_ITEM_SKLAD_Click;
             // 
             // MENU_ITEM_OPERATIONS
             // 
             MENU_ITEM_OPERATIONS.Name = "MENU_ITEM_OPERATIONS";
-            MENU_ITEM_OPERATIONS.Size = new Size(224, 26);
+            MENU_ITEM_OPERATIONS.Size = new Size(191, 34);
             MENU_ITEM_OPERATIONS.Text = "Продажи";
             MENU_ITEM_OPERATIONS.Click += MENU_ITEM_OPERATIONS_Click;
             // 
             // MENU_PROFILE
             // 
             MENU_PROFILE.Name = "MENU_PROFILE";
-            MENU_PROFILE.Size = new Size(87, 24);
+            MENU_PROFILE.Size = new Size(103, 29);
             MENU_PROFILE.Text = "Профиль";
             MENU_PROFILE.Click += MENU_PROFILE_Click;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1000, 562);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(4, 4, 4, 4);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Главная страница";
             FormClosing += MainForm_FormClosing;
             Load += MainForm_Load;
+            Shown += MainForm_Shown;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

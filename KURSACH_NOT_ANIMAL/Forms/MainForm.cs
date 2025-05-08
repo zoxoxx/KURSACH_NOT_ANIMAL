@@ -1,10 +1,12 @@
 ﻿using KURSACH_NOT_ANIMAL.Classes.DbClasses;
 using KURSACH_NOT_ANIMAL.Forms.Admin;
 using KURSACH_NOT_ANIMAL.Forms.Admin.ProductRes;
+using KURSACH_NOT_ANIMAL.Forms.Admin.ScheduleRes;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Shop;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Sklad;
 using KURSACH_NOT_ANIMAL.Forms.Reestr;
 using KURSACH_NOT_ANIMAL.Model;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -100,6 +102,15 @@ namespace KURSACH_NOT_ANIMAL.Forms
             this.Hide();
             productReestr.ShowDialog();
             this.Show();
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            if (UserFromDb.CheckRoleAcess(CurrentUser.Id, "Продавец"))
+            {
+                if (!ScheduleFromDb.CheckWorktime(CurrentUser.Id))
+                    MessageBox.Show("Сейчас нерабочее время. Оно будет засчитано как переработка", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

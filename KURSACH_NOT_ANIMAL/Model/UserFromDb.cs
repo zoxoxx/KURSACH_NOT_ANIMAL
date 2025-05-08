@@ -239,6 +239,42 @@ namespace KURSACH_NOT_ANIMAL.Model
             return users;
         }
 
+        public static List<UserView>? GetWorkers()
+        {
+            List<UserView>? users = new List<UserView>();
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionStr.connectionString))
+                {
+                    connection.Open();
+
+                    string sqlExp = "select u.ID, u.PHYO, u.ROLE_ID, r.NAME, u.BIRTHDAY, u.PHONE, u.BALANCE, u.LOGIN, u.PASSWORD " +
+                        "from USER_SYSTEM u " +
+                        "join ROLE r on r.ID = u.ROLE_ID " +
+                        "where r.NAME = 'Продавец'";
+                    NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (!reader.HasRows)
+                        return null;
+
+                    while (reader.Read())
+                        users.Add(new UserView((int)reader[0], reader[1].ToString()!, (int)reader[2],
+                            reader[3].ToString()!, DateOnly.FromDateTime(((DateTime)reader[4])), reader[5].ToString()!, (double)reader[6], reader[7].ToString()!, reader[8].ToString()!));
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show("Было вызвано исключение при проверке наличия пользователя в системе,\n" +
+                    "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return null;
+            }
+
+            return users;
+        }
+
         public static bool DeleteUser(int userId)
         {
             try
