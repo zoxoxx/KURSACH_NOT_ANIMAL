@@ -1,6 +1,7 @@
 ﻿using KURSACH_NOT_ANIMAL.Classes.DbClasses;
 using KURSACH_NOT_ANIMAL.Classes.ViewClasses;
 using KURSACH_NOT_ANIMAL.Forms.Admin;
+using KURSACH_NOT_ANIMAL.Forms.Admin.Operations;
 using KURSACH_NOT_ANIMAL.Forms.Admin.ProductRes;
 using KURSACH_NOT_ANIMAL.Forms.Admin.ScheduleRes;
 using KURSACH_NOT_ANIMAL.Forms.Admin.Shop;
@@ -102,7 +103,10 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
         private void MENU_ITEM_OPERATIONS_Click(object sender, EventArgs e)
         {
-
+            OperationsReestr operationsReestr = new OperationsReestr();
+            this.Hide();
+            operationsReestr.ShowDialog();
+            this.Show();
         }
 
         private void MENU_ITEM_PRODUCTS_Click(object sender, EventArgs e)
@@ -124,24 +128,6 @@ namespace KURSACH_NOT_ANIMAL.Forms
             }
         }
 
-        private void DG_PRODUCTS_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (UserFromDb.CheckRoleAcess(CurrentUser.Id, "Клиент"))
-                return;
-
-            ProductView? selectedProduct = DG_PRODUCTS.CurrentRow.DataBoundItem as ProductView;
-
-            if (selectedProduct is null)
-                return;
-
-            OperationForm operationForm = new OperationForm(selectedProduct);
-            this.Hide();
-            operationForm.ShowDialog();
-            this.Show();
-
-            DataGridLoad();
-        }
-
         private void DataGridLoad()
         {
             products = ProductFromDb.GetProductsWithCategory();
@@ -157,7 +143,25 @@ namespace KURSACH_NOT_ANIMAL.Forms
             }
 
             string filter = TB_SEARCH.Text;
-            
+
+        }
+
+        private void DG_PRODUCTS_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!UserFromDb.CheckRoleAcess(CurrentUser.Id, "Клиент"))
+                return;
+
+            ProductView? selectedProduct = DG_PRODUCTS.CurrentRow.DataBoundItem as ProductView;
+
+            if (selectedProduct is null)
+                return;
+
+            OperationForm operationForm = new OperationForm(selectedProduct);
+            this.Hide();
+            operationForm.ShowDialog();
+            this.Show();
+
+            DataGridLoad();
         }
     }
 }

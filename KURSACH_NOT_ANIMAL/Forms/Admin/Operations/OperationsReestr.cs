@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KURSACH_NOT_ANIMAL.Forms.Admin.Operations
 {
@@ -44,6 +45,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Operations
         private void OperationsReestr_Load(object sender, EventArgs e)
         {
             DataGridLoad();
+            DisableButtons();
         }
 
         private void DataGridLoad()
@@ -62,14 +64,17 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Operations
 
             switch (columnName)
             {
-                case "Approve":
+                case "Apply":
                     operation.Status = "Выполнено";
+                    operation.StatusId = 1;
                     break;
                 case "Return":
                     operation.Status = "Возврат";
+                    operation.StatusId = 3;
                     break;
                 case "Decline":
                     operation.Status = "Отмена";
+                    operation.StatusId = 4;
                     break;
                 default:
                     return;
@@ -77,21 +82,32 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Operations
 
             DG_OPERATIONS.Rows[e.RowIndex].Cells["Status"].Value = operation.Status;
 
-            DisableActionButtons(e.RowIndex);
-
             OperationFromDb.UpdateOperation(operation);
+            operations = OperationFromDb.GetOperations();
+            DG_OPERATIONS.DataSource = null;
+            DG_OPERATIONS.DataSource = operations;
+            DisableButtons();
         }
 
-        private void DisableActionButtons(int rowIndex)
+        private void DisableButtons()
         {
-            foreach (string buttonColumn in new[] { "Approve", "Return", "Decline" })
+            foreach (DataGridViewRow row in DG_OPERATIONS.Rows)
             {
-                var cell = DG_OPERATIONS.Rows[rowIndex].Cells[buttonColumn] as DataGridViewButtonCell;
-                if (cell != null)
+                if (row.IsNewRow) continue;
+                for (int e = 9; e < row.Cells.Count; e++)
+                if (e >= 0 && DG_OPERATIONS.Columns[e] is DataGridViewButtonColumn)
                 {
-                    cell.ReadOnly = true;
-                    cell.Style.ForeColor = Color.Gray;
-                    cell.Style.SelectionForeColor = Color.Gray;
+                    var status = row.Cells["Status"].Value?.ToString();
+                    if (status != "В обработке")
+                    {
+                        foreach (var colName in new[] { "Apply", "Return", "Decline" })
+                        {
+                            if (row.Cells[colName] is DataGridViewCell)
+                            {
+                                row.Cells[colName] = new DataGridViewTextBoxCell { Value = "" };
+                            }
+                        }
+                    }
                 }
             }
         }
