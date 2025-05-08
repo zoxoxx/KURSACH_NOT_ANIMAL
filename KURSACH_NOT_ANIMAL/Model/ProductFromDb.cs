@@ -210,7 +210,7 @@ namespace KURSACH_NOT_ANIMAL.Model
                         "where ID = @Id";
                     NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
                     cmd.Parameters.AddWithValue("Id", changedProduct.Id);
-                    cmd.Parameters.AddWithValue("Weight", changedProduct.Name);
+                    cmd.Parameters.AddWithValue("Weight", changedProduct.Weight);
                     cmd.Parameters.AddWithValue("Name", changedProduct.Name);
                     cmd.Parameters.AddWithValue("Commentary", changedProduct.Commentary);
                     cmd.Parameters.AddWithValue("Description", changedProduct.Description);
