@@ -56,6 +56,7 @@
             DG_OPERATIONS.RowHeadersWidth = 62;
             DG_OPERATIONS.Size = new Size(1365, 666);
             DG_OPERATIONS.TabIndex = 0;
+            DG_OPERATIONS.CellContentClick += DG_OPERATIONS_CellContentClick;
             // 
             // Id
             // 
@@ -136,6 +137,7 @@
             Apply.MinimumWidth = 8;
             Apply.Name = "Apply";
             Apply.ReadOnly = true;
+            Apply.Text = "";
             Apply.Width = 50;
             // 
             // Return
@@ -162,6 +164,7 @@
             Controls.Add(DG_OPERATIONS);
             Name = "OperationsReestr";
             Text = "Операции";
+            Load += OperationsReestr_Load;
             ((System.ComponentModel.ISupportInitialize)DG_OPERATIONS).EndInit();
             ResumeLayout(false);
         }
