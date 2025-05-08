@@ -35,9 +35,6 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Sklad
             CMB_PARTNER.DisplayMember = "Name";
             CMB_PARTNER.ValueMember = "Id";
 
-            CMB_SHOP.DisplayMember = "Name";
-            CMB_SHOP.ValueMember = "Id";
-
             CMB_PRODUCT.DisplayMember = "Name";
             CMB_PRODUCT.ValueMember = "Id";
         }
@@ -55,12 +52,6 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Sklad
             if (!double.TryParse(TB_PRICE.Text, out price) || price <= 0)
             {
                 MessageBox.Show("Цена закупки должна быть целочисленная и больше 0.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (CMB_SHOP.SelectedValue is null || Convert.ToInt32(CMB_SHOP.SelectedValue) <= 0)
-            {
-                MessageBox.Show("Выберите магазин, если отсутствует необходимый магазин, обратитесь к администратору системы.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -86,7 +77,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Sklad
                     datePurchase = DateOnly.FromDateTime(parsedDate);
 
                 bool result = SkladFromDb.AddPurchase(Convert.ToInt32(CMB_PRODUCT.SelectedValue), Convert.ToInt32(TB_COUNT.Text), 
-                    Convert.ToInt32(CMB_SHOP.SelectedValue), Convert.ToInt32(CMB_PARTNER.SelectedValue), 
+                    0, Convert.ToInt32(CMB_PARTNER.SelectedValue), 
                     Convert.ToDouble(TB_PRICE.Text), datePurchase);
 
                 if (result)
@@ -103,7 +94,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Sklad
                     datePurchase = DateOnly.FromDateTime(parsedDate);
 
                 bool result = SkladFromDb.UpdatePurchase(Convert.ToInt32(CMB_PRODUCT.SelectedValue), Convert.ToInt32(TB_COUNT.Text), 
-                    Convert.ToInt32(CMB_SHOP.SelectedValue), Convert.ToInt32(CMB_PARTNER.SelectedValue), 
+                    0, Convert.ToInt32(CMB_PARTNER.SelectedValue), 
                     Convert.ToDouble(TB_PRICE.Text), datePurchase, purchase.Id);
 
                 if (result)
@@ -141,7 +132,6 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Sklad
                 }
 
                 CMB_PARTNER.SelectedValue = dbPurchase.PartnerId;
-                CMB_SHOP.SelectedValue = dbPurchase.ShopId;
                 CMB_PRODUCT.SelectedValue = dbPurchase.ProductId;
             }
         }
@@ -150,9 +140,6 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Sklad
         {
             partners = ShopFromDb.GetPartnerShops();
             CMB_PARTNER.DataSource = partners;
-
-            shops = ShopFromDb.GetOurShops();
-            CMB_SHOP.DataSource = shops;
 
             products = ProductFromDb.GetProducts();
             CMB_PRODUCT.DataSource = products;

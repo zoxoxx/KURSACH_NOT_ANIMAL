@@ -33,27 +33,26 @@
             label1 = new Label();
             TB_ANIMALS = new TextBox();
             BTN_CLEAR_ANIMALS = new Button();
-            label2 = new Label();
             TB_NAME = new TextBox();
-            label3 = new Label();
             TB_DESCRIPTION = new TextBox();
-            label4 = new Label();
             TB_PRICE = new TextBox();
-            label5 = new Label();
             TB_WEIGHT = new TextBox();
-            label6 = new Label();
-            TB_COMMENTARY = new TextBox();
             label7 = new Label();
             CMB_CATEGORY = new ComboBox();
+            panel1 = new Panel();
+            label3 = new Label();
+            label2 = new Label();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // BTN_ACTION
             // 
             BTN_ACTION.BackColor = SystemColors.ActiveBorder;
             BTN_ACTION.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            BTN_ACTION.Location = new Point(245, 352);
+            BTN_ACTION.Location = new Point(31, 452);
+            BTN_ACTION.Margin = new Padding(4);
             BTN_ACTION.Name = "BTN_ACTION";
-            BTN_ACTION.Size = new Size(301, 51);
+            BTN_ACTION.Size = new Size(440, 64);
             BTN_ACTION.TabIndex = 5;
             BTN_ACTION.Text = "Добавить/Изменить";
             BTN_ACTION.UseVisualStyleBackColor = false;
@@ -62,167 +61,156 @@
             // CMB_ANIMALS
             // 
             CMB_ANIMALS.FormattingEnabled = true;
-            CMB_ANIMALS.Location = new Point(807, 65);
+            CMB_ANIMALS.Location = new Point(254, 215);
+            CMB_ANIMALS.Margin = new Padding(4);
             CMB_ANIMALS.Name = "CMB_ANIMALS";
-            CMB_ANIMALS.Size = new Size(199, 28);
+            CMB_ANIMALS.Size = new Size(217, 33);
             CMB_ANIMALS.TabIndex = 6;
             CMB_ANIMALS.SelectedValueChanged += CMB_ANIMALS_SelectedValueChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(865, 28);
+            label1.Location = new Point(254, 186);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(82, 20);
+            label1.Size = new Size(98, 25);
             label1.TabIndex = 7;
             label1.Text = "Животные";
             // 
             // TB_ANIMALS
             // 
-            TB_ANIMALS.Location = new Point(807, 116);
+            TB_ANIMALS.Location = new Point(254, 246);
+            TB_ANIMALS.Margin = new Padding(4);
             TB_ANIMALS.Multiline = true;
             TB_ANIMALS.Name = "TB_ANIMALS";
-            TB_ANIMALS.Size = new Size(199, 147);
+            TB_ANIMALS.Size = new Size(217, 183);
             TB_ANIMALS.TabIndex = 8;
             // 
             // BTN_CLEAR_ANIMALS
             // 
             BTN_CLEAR_ANIMALS.BackColor = SystemColors.ActiveBorder;
             BTN_CLEAR_ANIMALS.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            BTN_CLEAR_ANIMALS.Location = new Point(826, 278);
+            BTN_CLEAR_ANIMALS.Location = new Point(423, 391);
+            BTN_CLEAR_ANIMALS.Margin = new Padding(4);
             BTN_CLEAR_ANIMALS.Name = "BTN_CLEAR_ANIMALS";
-            BTN_CLEAR_ANIMALS.Size = new Size(167, 51);
+            BTN_CLEAR_ANIMALS.Size = new Size(48, 39);
             BTN_CLEAR_ANIMALS.TabIndex = 9;
-            BTN_CLEAR_ANIMALS.Text = "Очистить";
+            BTN_CLEAR_ANIMALS.Text = "X";
             BTN_CLEAR_ANIMALS.UseVisualStyleBackColor = false;
             BTN_CLEAR_ANIMALS.Click += BTN_CLEAR_ANIMALS_Click;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 65);
-            label2.Name = "label2";
-            label2.Size = new Size(116, 20);
-            label2.TabIndex = 10;
-            label2.Text = "Наименование";
-            // 
             // TB_NAME
             // 
-            TB_NAME.Location = new Point(134, 66);
+            TB_NAME.Location = new Point(27, 88);
+            TB_NAME.Margin = new Padding(4);
             TB_NAME.Name = "TB_NAME";
-            TB_NAME.Size = new Size(148, 27);
+            TB_NAME.PlaceholderText = "Название";
+            TB_NAME.Size = new Size(219, 31);
             TB_NAME.TabIndex = 11;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 166);
-            label3.Name = "label3";
-            label3.Size = new Size(79, 20);
-            label3.TabIndex = 12;
-            label3.Text = "Описание";
             // 
             // TB_DESCRIPTION
             // 
-            TB_DESCRIPTION.Location = new Point(134, 163);
+            TB_DESCRIPTION.Location = new Point(31, 216);
+            TB_DESCRIPTION.Margin = new Padding(4);
             TB_DESCRIPTION.Multiline = true;
             TB_DESCRIPTION.Name = "TB_DESCRIPTION";
-            TB_DESCRIPTION.Size = new Size(148, 166);
+            TB_DESCRIPTION.PlaceholderText = "Описание";
+            TB_DESCRIPTION.Size = new Size(215, 214);
             TB_DESCRIPTION.TabIndex = 13;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(332, 64);
-            label4.Name = "label4";
-            label4.Size = new Size(45, 20);
-            label4.TabIndex = 14;
-            label4.Text = "Цена";
             // 
             // TB_PRICE
             // 
-            TB_PRICE.Location = new Point(451, 64);
+            TB_PRICE.Location = new Point(254, 88);
+            TB_PRICE.Margin = new Padding(4);
             TB_PRICE.Name = "TB_PRICE";
-            TB_PRICE.Size = new Size(59, 27);
+            TB_PRICE.PlaceholderText = "Цена";
+            TB_PRICE.Size = new Size(168, 31);
             TB_PRICE.TabIndex = 15;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(332, 116);
-            label5.Name = "label5";
-            label5.Size = new Size(33, 20);
-            label5.TabIndex = 16;
-            label5.Text = "Вес";
             // 
             // TB_WEIGHT
             // 
-            TB_WEIGHT.Location = new Point(450, 116);
+            TB_WEIGHT.Location = new Point(254, 127);
+            TB_WEIGHT.Margin = new Padding(4);
             TB_WEIGHT.Name = "TB_WEIGHT";
-            TB_WEIGHT.Size = new Size(60, 27);
+            TB_WEIGHT.PlaceholderText = "Вес";
+            TB_WEIGHT.Size = new Size(98, 31);
             TB_WEIGHT.TabIndex = 17;
-            // 
-            // label6
-            // 
-            label6.Location = new Point(332, 166);
-            label6.Name = "label6";
-            label6.Size = new Size(112, 45);
-            label6.TabIndex = 18;
-            label6.Text = "Комментарий";
-            // 
-            // TB_COMMENTARY
-            // 
-            TB_COMMENTARY.Location = new Point(450, 166);
-            TB_COMMENTARY.Multiline = true;
-            TB_COMMENTARY.Name = "TB_COMMENTARY";
-            TB_COMMENTARY.Size = new Size(148, 166);
-            TB_COMMENTARY.TabIndex = 19;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(664, 28);
+            label7.Location = new Point(27, 134);
+            label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(81, 20);
+            label7.Size = new Size(95, 25);
             label7.TabIndex = 20;
             label7.Text = "Категория";
             // 
             // CMB_CATEGORY
             // 
             CMB_CATEGORY.FormattingEnabled = true;
-            CMB_CATEGORY.Location = new Point(629, 66);
+            CMB_CATEGORY.Location = new Point(27, 163);
+            CMB_CATEGORY.Margin = new Padding(4);
             CMB_CATEGORY.Name = "CMB_CATEGORY";
-            CMB_CATEGORY.Size = new Size(151, 28);
+            CMB_CATEGORY.Size = new Size(219, 33);
             CMB_CATEGORY.TabIndex = 21;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.ControlLight;
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(BTN_CLEAR_ANIMALS);
+            panel1.Controls.Add(TB_ANIMALS);
+            panel1.Controls.Add(CMB_CATEGORY);
+            panel1.Controls.Add(BTN_ACTION);
+            panel1.Controls.Add(label7);
+            panel1.Controls.Add(CMB_ANIMALS);
+            panel1.Controls.Add(TB_WEIGHT);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(TB_PRICE);
+            panel1.Controls.Add(TB_DESCRIPTION);
+            panel1.Controls.Add(TB_NAME);
+            panel1.Location = new Point(240, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(497, 538);
+            panel1.TabIndex = 22;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(357, 130);
+            label3.Margin = new Padding(1, 0, 1, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(65, 25);
+            label3.TabIndex = 23;
+            label3.Text = "грамм";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 22F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label2.Location = new Point(176, 12);
+            label2.Name = "label2";
+            label2.Size = new Size(145, 60);
+            label2.TabIndex = 22;
+            label2.Text = "Товар";
             // 
             // ProductForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1039, 450);
-            Controls.Add(CMB_CATEGORY);
-            Controls.Add(label7);
-            Controls.Add(TB_COMMENTARY);
-            Controls.Add(label6);
-            Controls.Add(TB_WEIGHT);
-            Controls.Add(label5);
-            Controls.Add(TB_PRICE);
-            Controls.Add(label4);
-            Controls.Add(TB_DESCRIPTION);
-            Controls.Add(label3);
-            Controls.Add(TB_NAME);
-            Controls.Add(label2);
-            Controls.Add(BTN_CLEAR_ANIMALS);
-            Controls.Add(TB_ANIMALS);
-            Controls.Add(label1);
-            Controls.Add(CMB_ANIMALS);
-            Controls.Add(BTN_ACTION);
+            ClientSize = new Size(978, 564);
+            Controls.Add(panel1);
+            Margin = new Padding(4);
             Name = "ProductForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Товар";
             Load += ProductForm_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -232,17 +220,14 @@
         private Label label1;
         private TextBox TB_ANIMALS;
         private Button BTN_CLEAR_ANIMALS;
-        private Label label2;
         private TextBox TB_NAME;
-        private Label label3;
         private TextBox TB_DESCRIPTION;
-        private Label label4;
         private TextBox TB_PRICE;
-        private Label label5;
         private TextBox TB_WEIGHT;
-        private Label label6;
-        private TextBox TB_COMMENTARY;
         private Label label7;
         private ComboBox CMB_CATEGORY;
+        private Panel panel1;
+        private Label label2;
+        private Label label3;
     }
 }
