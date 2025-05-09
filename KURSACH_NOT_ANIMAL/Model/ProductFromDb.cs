@@ -60,7 +60,7 @@ namespace KURSACH_NOT_ANIMAL.Model
                 {
                     connection.Open();
 
-                    string sqlExp = "select p.*, c.NAME " +
+                    string sqlExp = "select p.ID, p.WEIGHT, p.NAME, p.COMMENTARY, p.DESCRIPTION, p.CATEGORY_ID, p.PRICE, c.NAME " +
                         "from PRODUCT p " +
                         "join CATEGORY_PRODUCT c on c.ID = p.CATEGORY_ID";
                     NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
@@ -96,9 +96,9 @@ namespace KURSACH_NOT_ANIMAL.Model
                 {
                     connection.Open();
 
-                    string sqlExp = "select p.*, c.NAME" +
+                    string sqlExp = "select p.ID, p.WEIGHT, p.NAME, p.COMMENTARY, p.DESCRIPTION, p.CATEGORY_ID, p.PRICE, c.NAME " +
                         "from PRODUCT p " +
-                        "join CATEGORY_ANIMAL c on c.ID = p.CATEGORY_ID" +
+                        "join CATEGORY_PRODUCT c on c.ID = p.CATEGORY_ID" +
                         "where p.ID = @Id";
                     NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
                     cmd.Parameters.AddWithValue("Id", ProductId);
@@ -133,9 +133,9 @@ namespace KURSACH_NOT_ANIMAL.Model
                 {
                     connection.Open();
 
-                    string sqlExp = "select *" +
-                        "from PRODUCT" +
-                        "where ID = @Id";
+                    string sqlExp = "select p.ID, p.WEIGHT, p.NAME, p.COMMENTARY, p.DESCRIPTION, p.CATEGORY_ID, p.PRICE, c.NAME" +
+                        "from PRODUCT p" +
+                        "where p.ID = @Id";
                     NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
                     cmd.Parameters.AddWithValue("Id", ProductId);
                     NpgsqlDataReader reader = cmd.ExecuteReader();
@@ -555,6 +555,47 @@ namespace KURSACH_NOT_ANIMAL.Model
             }
 
             return recomendationsId;
+        }
+
+        public static List<ProductView>? GetProductsWithMaskRecomendation(string nameAnimal)
+        {
+            List<ProductView> products = new List<ProductView>();
+
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionStr.connectionString))
+                {
+                    connection.Open();
+
+                    string sqlExp = "select p.ID, p.WEIGHT, p.NAME, p.COMMENTARY, p.DESCRIPTION, p.CATEGORY_ID, p.PRICE, c.NAME " +
+                        "from PRODUCT p " +
+                        "join CATEGORY_PRODUCT c on c.ID = p.CATEGORY_ID " +
+                        "join PRODUCT_FOR_ANIMAL pa on pa.PRODUCT_ID = p.ID " +
+                        "join ANIMAL a on a.ID = pa.ANIMAL_ID " +
+                        "where a.NAME = @NameAnimal";
+                    NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
+                    cmd.Parameters.AddWithValue("NameAnimal", nameAnimal);
+
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (!reader.HasRows)
+                        return null;
+
+                    while (reader.Read())
+                        products.Add(new ProductView((int)reader[0], (double)reader[1], reader[2].ToString()!, reader[3].ToString(), reader[4].ToString(), (int)reader[5], (double)reader[6], reader[7].ToString()!));
+                }
+            }
+            catch(NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show("Было вызвано исключение при получении списка рекомендаций животным по продуктам,\n" +
+                "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                return null;
+            }
+
+            return products;
         }
     }
 }

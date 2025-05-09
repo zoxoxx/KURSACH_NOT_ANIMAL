@@ -27,6 +27,8 @@ namespace KURSACH_NOT_ANIMAL.Forms
     {
         public static UserSystem CurrentUser { get; set; } = default!;
         List<ProductView>? products;
+        List<ProductView>? recomendations;
+        List<ProductView>? productsFilter;
 
         public MainForm(UserSystem currentUser)
         {
@@ -128,6 +130,24 @@ namespace KURSACH_NOT_ANIMAL.Forms
             }
         }
 
+        private void DG_PRODUCTS_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!UserFromDb.CheckRoleAcess(CurrentUser.Id, "Клиент"))
+                return;
+
+            ProductView? selectedProduct = DG_PRODUCTS.CurrentRow.DataBoundItem as ProductView;
+
+            if (selectedProduct is null)
+                return;
+
+            OperationForm operationForm = new OperationForm(selectedProduct);
+            this.Hide();
+            operationForm.ShowDialog();
+            this.Show();
+
+            DataGridLoad();
+        }
+
         private void DataGridLoad()
         {
             products = ProductFromDb.GetProductsWithCategory();
@@ -136,14 +156,35 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
         private void TB_SEARCH_TextChanged(object sender, EventArgs e)
         {
+            if (products is null)
+                return;
+
             if (TB_SEARCH.Text.Trim() == "")
             {
                 DataGridLoad();
                 return;
             }
 
-            string filter = TB_SEARCH.Text;
+            productsFilter = products;
 
+            string filter = TB_SEARCH.Text;
+            recomendations = ProductFromDb.GetProductsWithMaskRecomendation(filter);
+
+            if (recomendations is null)
+            {
+                productsFilter = products.Where(p => p.Name.Contains(filter)).ToList();
+                DG_PRODUCTS.DataSource = productsFilter;
+            }
+            else
+            {
+                HashSet<int> recomendationIds = new HashSet<int>(recomendations.Select(r => r.Id));
+                productsFilter = products
+                    .Where(p =>
+                        p.Name.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0
+                        || recomendationIds.Contains(p.Id))
+                    .ToList();
+            }
+            DG_PRODUCTS.DataSource = productsFilter;
         }
 
         private void DG_PRODUCTS_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

@@ -213,6 +213,8 @@
             // 
             // TB_SEARCH
             // 
+            TB_SEARCH.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            TB_SEARCH.Location = new Point(596, 34);
             TB_SEARCH.Location = new Point(745, 42);
             TB_SEARCH.Margin = new Padding(4);
             TB_SEARCH.Name = "TB_SEARCH";
@@ -222,6 +224,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Location = new Point(636, 48);
             label1.Margin = new Padding(4, 0, 4, 0);
