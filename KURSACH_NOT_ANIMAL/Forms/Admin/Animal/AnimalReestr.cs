@@ -232,6 +232,16 @@ namespace KURSACH_NOT_ANIMAL.Forms.Reestr
                 if (selectedCategory is null)
                     return;
 
+                AnimalView? selectedAnimal = DG_ANIMALS.CurrentRow.DataBoundItem as AnimalView;
+
+                if (selectedAnimal != null)
+                    if (selectedAnimal.CategoryId != null && !string.IsNullOrWhiteSpace(selectedAnimal.Name) && selectedAnimal.AnimalId != 0 && selectedAnimal.CategoryId > 0)
+                    {
+                        CategoryAnimal? newCategory = AnimalFromDb.GetCategory(selectedValue?? "");
+                        if (newCategory != null)
+                            AnimalFromDb.UpdateAnimal(new Classes.DbClasses.Animal(selectedAnimal.AnimalId, selectedAnimal.Name, newCategory.Id, selectedAnimal.Description ?? ""));
+                    }
+
                 animals![DG_ANIMALS.CurrentRow.Index].CategoryId = selectedCategory.Id;
                 animals![DG_ANIMALS.CurrentRow.Index].CategoryName = selectedCategory.Name;
                 animals![DG_ANIMALS.CurrentRow.Index].CategoryDescription = selectedCategory.Description?? "";

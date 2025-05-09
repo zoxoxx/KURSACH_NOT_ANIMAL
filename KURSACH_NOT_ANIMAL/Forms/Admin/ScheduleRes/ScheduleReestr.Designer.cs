@@ -95,7 +95,7 @@
             DG_SCHEDULE.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_SCHEDULE.Columns.AddRange(new DataGridViewColumn[] { Id, UserId, PHIO, Date, TimeStart, TimeEnd });
             DG_SCHEDULE.Location = new Point(10, 66);
-            DG_SCHEDULE.Margin = new Padding(2, 2, 2, 2);
+            DG_SCHEDULE.Margin = new Padding(2);
             DG_SCHEDULE.Name = "DG_SCHEDULE";
             DG_SCHEDULE.RowHeadersWidth = 62;
             DG_SCHEDULE.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -107,6 +107,7 @@
             Id.HeaderText = "Ключ";
             Id.MinimumWidth = 8;
             Id.Name = "Id";
+            Id.Visible = false;
             // 
             // UserId
             // 
@@ -148,7 +149,7 @@
             Controls.Add(BTN_DELETE);
             Controls.Add(BTN_EDIT);
             Controls.Add(BTN_ADD);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             MinimumSize = new Size(804, 489);
             Name = "ScheduleReestr";
             StartPosition = FormStartPosition.CenterScreen;

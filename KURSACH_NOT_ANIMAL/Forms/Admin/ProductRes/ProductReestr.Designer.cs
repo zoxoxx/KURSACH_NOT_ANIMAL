@@ -77,7 +77,6 @@
             DG_PRODUCTS.AllowUserToAddRows = false;
             DG_PRODUCTS.AllowUserToDeleteRows = false;
             DG_PRODUCTS.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            DG_PRODUCTS.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DG_PRODUCTS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_PRODUCTS.Columns.AddRange(new DataGridViewColumn[] { Id, ProductName, Weight, Price, Category, Description, Commentary, CategoryId });
             DG_PRODUCTS.Location = new Point(10, 51);
@@ -97,6 +96,7 @@
             Id.Name = "Id";
             Id.ReadOnly = true;
             Id.Visible = false;
+            Id.Width = 125;
             // 
             // ProductName
             // 
@@ -104,6 +104,7 @@
             ProductName.MinimumWidth = 8;
             ProductName.Name = "ProductName";
             ProductName.ReadOnly = true;
+            ProductName.Width = 140;
             // 
             // Weight
             // 
@@ -111,6 +112,7 @@
             Weight.MinimumWidth = 8;
             Weight.Name = "Weight";
             Weight.ReadOnly = true;
+            Weight.Width = 140;
             // 
             // Price
             // 
@@ -118,6 +120,7 @@
             Price.MinimumWidth = 8;
             Price.Name = "Price";
             Price.ReadOnly = true;
+            Price.Width = 139;
             // 
             // Category
             // 
@@ -125,6 +128,7 @@
             Category.MinimumWidth = 8;
             Category.Name = "Category";
             Category.ReadOnly = true;
+            Category.Width = 140;
             // 
             // Description
             // 
@@ -132,6 +136,7 @@
             Description.MinimumWidth = 8;
             Description.Name = "Description";
             Description.ReadOnly = true;
+            Description.Width = 140;
             // 
             // Commentary
             // 
@@ -140,6 +145,7 @@
             Commentary.Name = "Commentary";
             Commentary.ReadOnly = true;
             Commentary.Visible = false;
+            Commentary.Width = 125;
             // 
             // CategoryId
             // 
@@ -148,6 +154,7 @@
             CategoryId.Name = "CategoryId";
             CategoryId.ReadOnly = true;
             CategoryId.Visible = false;
+            CategoryId.Width = 125;
             // 
             // ProductReestr
             // 

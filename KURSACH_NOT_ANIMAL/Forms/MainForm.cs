@@ -36,16 +36,16 @@ namespace KURSACH_NOT_ANIMAL.Forms
 
             InitializeComponent();
 
-            DG_PRODUCTS.Columns[0].DataPropertyName = "Id";
-            DG_PRODUCTS.Columns[1].DataPropertyName = "Name";
-            DG_PRODUCTS.Columns[2].DataPropertyName = "Weight";
-            DG_PRODUCTS.Columns[3].DataPropertyName = "Price";
-            DG_PRODUCTS.Columns[4].DataPropertyName = "CategoryName";
-            DG_PRODUCTS.Columns[5].DataPropertyName = "Description";
-            DG_PRODUCTS.Columns[6].DataPropertyName = "Commentary";
-            DG_PRODUCTS.Columns[7].DataPropertyName = "CategoryId";
+            this.DG_PRODUCTS.Columns[0].DataPropertyName = "Id";
+            this.DG_PRODUCTS.Columns[1].DataPropertyName = "Name";
+            this.DG_PRODUCTS.Columns[2].DataPropertyName = "Weight";
+            this.DG_PRODUCTS.Columns[3].DataPropertyName = "Price";
+            this.DG_PRODUCTS.Columns[4].DataPropertyName = "CategoryName";
+            this.DG_PRODUCTS.Columns[5].DataPropertyName = "Description";
+            this.DG_PRODUCTS.Columns[6].DataPropertyName = "Commentary";
+            this.DG_PRODUCTS.Columns[7].DataPropertyName = "CategoryId";
 
-            DG_PRODUCTS.AutoGenerateColumns = false;
+            this.DG_PRODUCTS.AutoGenerateColumns = false;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -130,28 +130,10 @@ namespace KURSACH_NOT_ANIMAL.Forms
             }
         }
 
-        private void DG_PRODUCTS_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (!UserFromDb.CheckRoleAcess(CurrentUser.Id, "Клиент"))
-                return;
-
-            ProductView? selectedProduct = DG_PRODUCTS.CurrentRow.DataBoundItem as ProductView;
-
-            if (selectedProduct is null)
-                return;
-
-            OperationForm operationForm = new OperationForm(selectedProduct);
-            this.Hide();
-            operationForm.ShowDialog();
-            this.Show();
-
-            DataGridLoad();
-        }
-
         private void DataGridLoad()
         {
             products = ProductFromDb.GetProductsWithCategory();
-            DG_PRODUCTS.DataSource = products;
+            this.DG_PRODUCTS.DataSource = products;
         }
 
         private void TB_SEARCH_TextChanged(object sender, EventArgs e)
@@ -173,7 +155,7 @@ namespace KURSACH_NOT_ANIMAL.Forms
             if (recomendations is null)
             {
                 productsFilter = products.Where(p => p.Name.Contains(filter)).ToList();
-                DG_PRODUCTS.DataSource = productsFilter;
+                this.DG_PRODUCTS.DataSource = productsFilter;
             }
             else
             {
@@ -184,7 +166,7 @@ namespace KURSACH_NOT_ANIMAL.Forms
                         || recomendationIds.Contains(p.Id))
                     .ToList();
             }
-            DG_PRODUCTS.DataSource = productsFilter;
+            this.DG_PRODUCTS.DataSource = productsFilter;
         }
 
         private void DG_PRODUCTS_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -192,7 +174,7 @@ namespace KURSACH_NOT_ANIMAL.Forms
             if (!UserFromDb.CheckRoleAcess(CurrentUser.Id, "Клиент"))
                 return;
 
-            ProductView? selectedProduct = DG_PRODUCTS.CurrentRow.DataBoundItem as ProductView;
+            ProductView? selectedProduct = this.DG_PRODUCTS.CurrentRow.DataBoundItem as ProductView;
 
             if (selectedProduct is null)
                 return;

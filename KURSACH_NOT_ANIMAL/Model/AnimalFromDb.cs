@@ -405,10 +405,14 @@ namespace KURSACH_NOT_ANIMAL.Model
             }
             catch(NpgsqlException ex)
             {
-                Debug.WriteLine(ex.Message);
-                MessageBox.Show("Было вызвано исключение при удалении животного,\n" +
-                    "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                if (ex.ErrorCode == -2147467259)
+                    MessageBox.Show("Данное животное нельзя удалить, так как оно используется в рекомендациях актуальных товаров.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    Debug.WriteLine(ex.Message);
+                    MessageBox.Show("Было вызвано исключение при удалении животного,\n" +
+                        "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 return false;
             }
 

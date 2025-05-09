@@ -163,7 +163,7 @@
             Controls.Add(DG_USERS);
             Name = "UserReestr";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Пользватели";
+            Text = "Пользователи";
             Load += UserReestr_Load;
             ((System.ComponentModel.ISupportInitialize)DG_USERS).EndInit();
             ResumeLayout(false);
