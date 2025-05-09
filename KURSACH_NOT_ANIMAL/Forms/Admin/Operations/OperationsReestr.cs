@@ -65,8 +65,12 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Operations
             switch (columnName)
             {
                 case "Apply":
-                    operation.Status = "Выполнено";
-                    operation.StatusId = 1;
+                    if (SkladFromDb.GetProductAmount(operation.ProductId) >= operation.Count)
+                    {
+                        operation.Status = "Выполнено";
+                        operation.StatusId = 1;
+                    }
+                    else MessageBox.Show("Недостаточное количество товара на складе", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 case "Return":
                     operation.Status = "Возврат";

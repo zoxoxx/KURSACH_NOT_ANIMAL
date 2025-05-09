@@ -76,8 +76,8 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Sklad
                 if (DateTime.TryParse(dateString, out parsedDate))
                     datePurchase = DateOnly.FromDateTime(parsedDate);
 
-                bool result = SkladFromDb.AddPurchase(Convert.ToInt32(CMB_PRODUCT.SelectedValue), Convert.ToInt32(TB_COUNT.Text), 
-                    0, Convert.ToInt32(CMB_PARTNER.SelectedValue), 
+                bool result = SkladFromDb.AddPurchase(Convert.ToInt32(CMB_PRODUCT.SelectedValue), Convert.ToInt32(TB_COUNT.Text),
+                    Convert.ToInt32(CMB_PARTNER.SelectedValue), 
                     Convert.ToDouble(TB_PRICE.Text), datePurchase);
 
                 if (result)
