@@ -26,8 +26,8 @@ namespace KURSACH_NOT_ANIMAL.Model
                     connection.Open();
 
                     string sqlExp = @"SELECT
-                        (SELECT COALESCE(SUM(COUNT), 0) FROM SKLAD WHERE PRODUCT_ID = 1) -
-                        (SELECT COALESCE(SUM(COUNT), 0) FROM OPERATION WHERE PRODUCT_ID = 1 AND STATUS_ID = 1) AS COUNT_PRODUCT;";
+                        (SELECT COALESCE(SUM(COUNT), 0) FROM SKLAD WHERE PRODUCT_ID = @ProductId) -
+                        (SELECT COALESCE(SUM(COUNT), 0) FROM OPERATION WHERE PRODUCT_ID = @ProductId AND STATUS_ID = 1) AS COUNT_PRODUCT;";
                     NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
                     cmd.Parameters.AddWithValue("ProductId", productId);
                     NpgsqlDataReader reader = cmd.ExecuteReader();
@@ -42,7 +42,7 @@ namespace KURSACH_NOT_ANIMAL.Model
             catch (NpgsqlException ex)
             {
                 Debug.WriteLine(ex.Message);
-                MessageBox.Show("Было вызвано исключение при проверке наличия пользователя в системе,\n" +
+                MessageBox.Show("Было вызвано исключение при подсчете количества товара на складе,\n" +
                     "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return 0;
