@@ -23,10 +23,9 @@ namespace KURSACH_NOT_ANIMAL.Forms.Admin.Sklad
             DG_SKLAD.Columns[0].DataPropertyName = "Id";
             DG_SKLAD.Columns[1].DataPropertyName = "ProductName";
             DG_SKLAD.Columns[2].DataPropertyName = "Count";
-            DG_SKLAD.Columns[3].DataPropertyName = "ShopName";
-            DG_SKLAD.Columns[4].DataPropertyName = "PartnerName";
-            DG_SKLAD.Columns[5].DataPropertyName = "PurchasePrice";
-            DG_SKLAD.Columns[6].DataPropertyName = "DatePrihod";
+            DG_SKLAD.Columns[3].DataPropertyName = "PartnerName";
+            DG_SKLAD.Columns[4].DataPropertyName = "PurchasePrice";
+            DG_SKLAD.Columns[5].DataPropertyName = "DatePrihod";
 
             DG_SKLAD.AutoGenerateColumns = false;
         }

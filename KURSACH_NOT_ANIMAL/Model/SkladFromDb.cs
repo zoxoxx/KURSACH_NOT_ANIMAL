@@ -15,6 +15,41 @@ namespace KURSACH_NOT_ANIMAL.Model
 {
     public class SkladFromDb
     {
+        public static int GetProductAmount(int productId)
+        {
+            int amount = 0;
+
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionStr.connectionString))
+                {
+                    connection.Open();
+
+                    string sqlExp = @"SELECT
+                        (SELECT COALESCE(SUM(COUNT), 0) FROM SKLAD WHERE PRODUCT_ID = 1) -
+                        (SELECT COALESCE(SUM(COUNT), 0) FROM OPERATION WHERE PRODUCT_ID = 1 AND STATUS_ID = 1) AS COUNT_PRODUCT;";
+                    NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
+                    cmd.Parameters.AddWithValue("ProductId", productId);
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (!reader.HasRows)
+                        return 0;
+
+                    reader.Read();
+                    amount = Convert.ToInt32(reader[0]);
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show("Было вызвано исключение при проверке наличия пользователя в системе,\n" +
+                    "уведомьте разработчиков.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return 0;
+            }
+
+            return amount;
+        }
         public static List<SkladView>? GetAllPurchases()
         {
             List<SkladView> purchases = new List<SkladView>();
@@ -25,10 +60,9 @@ namespace KURSACH_NOT_ANIMAL.Model
                 {
                     connection.Open();
 
-                    string sqlExp = "select s.ID, p.NAME, s.COUNT, sh.NAME, pr.NAME, s.PURCHASE_PRICE, s.DATE_PRIHOD " +
+                    string sqlExp = "select s.ID, p.NAME, s.COUNT, pr.NAME, s.PURCHASE_PRICE, s.DATE_PRIHOD " +
                         "from SKLAD s " +
                         "join PRODUCT p on p.ID = s.PRODUCT_ID " +
-                        "join SHOP sh on sh.ID = s.SHOP_ID " +
                         "join PARTNER pr on pr.ID = s.PARTNER_ID";
                     NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
 
@@ -40,7 +74,7 @@ namespace KURSACH_NOT_ANIMAL.Model
                     while(reader.Read())
                         purchases.Add(new SkladView((int)reader[0], reader[1].ToString(), 
                             (int)reader[2], reader[3].ToString(), 
-                            reader[4].ToString(), (double)reader[5], DateOnly.FromDateTime((DateTime)reader[6])));
+                            (double)reader[4], DateOnly.FromDateTime((DateTime)reader[5])));
                 }
             }
             catch(NpgsqlException ex)
@@ -82,7 +116,7 @@ namespace KURSACH_NOT_ANIMAL.Model
             return true;
         }
 
-        public static bool AddPurchase(int productId, int count, int shopId, int partnerId, double purchasePrice, DateOnly datePrihod)
+        public static bool AddPurchase(int productId, int count, int partnerId, double purchasePrice, DateOnly datePrihod)
         {
             try
             {
@@ -90,12 +124,11 @@ namespace KURSACH_NOT_ANIMAL.Model
                 {
                     connection.Open();
 
-                    string sqlExp = "insert into SKLAD(PRODUCT_ID, COUNT, SHOP_ID, PARTNER_ID, PURCHASE_PRICE, DATE_PRIHOD) " +
-                        "values (@ProductId, @Count, @ShopId, @PartnerId, @PurchasePrice, @DatePrihod)";
+                    string sqlExp = "insert into SKLAD(PRODUCT_ID, COUNT, PARTNER_ID, PURCHASE_PRICE, DATE_PRIHOD) " +
+                        "values (@ProductId, @Count, @PartnerId, @PurchasePrice, @DatePrihod)";
                     NpgsqlCommand cmd = new NpgsqlCommand(sqlExp, connection);
                     cmd.Parameters.AddWithValue("ProductId", productId);
                     cmd.Parameters.AddWithValue("Count", count);
-                    cmd.Parameters.AddWithValue("ShopId", shopId);
                     cmd.Parameters.AddWithValue("PartnerId", partnerId);
                     cmd.Parameters.AddWithValue("PurchasePrice", purchasePrice);
                     cmd.Parameters.AddWithValue("DatePrihod", datePrihod);

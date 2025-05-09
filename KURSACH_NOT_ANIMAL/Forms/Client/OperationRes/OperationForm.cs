@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KURSACH_NOT_ANIMAL.Forms.Client.OperationRes
 {
@@ -21,6 +22,12 @@ namespace KURSACH_NOT_ANIMAL.Forms.Client.OperationRes
             this.product = product;
 
             InitializeComponent();
+
+            TB_DESCRIPTION.BackColor = Color.White;
+            TB_DESCRIPTION.ForeColor = Color.Black;
+
+            TB_FINAL_PRICE.BackColor = Color.White;
+            TB_FINAL_PRICE.ForeColor = Color.Black;
         }
 
         private void BTN_CREATE_OPERATION_Click(object sender, EventArgs e)
@@ -52,7 +59,7 @@ namespace KURSACH_NOT_ANIMAL.Forms.Client.OperationRes
             LBL_PRICE.Text = product.Price.ToString();
             LBL_WEIGHT.Text = product.Weight.ToString();
             LBL_NAME.Text = product.Name;
-            TB_DESCRIPTION.Text = product.Description?? "";
+            TB_DESCRIPTION.Text = product.Description ?? "";
         }
 
         private void TB_COUNT_TextChanged(object sender, EventArgs e)

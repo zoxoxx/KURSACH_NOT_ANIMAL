@@ -21,23 +21,37 @@ namespace KURSACH_NOT_ANIMAL.Model
             using (var connection = new NpgsqlConnection(ConnectionStr.connectionString))
             {
                 connection.Open();
+
                 string query = @"
-                    SELECT o.id, p.name AS product, o.product_id, o.count, o.summa,
-                           o.date_operation, o.time_operation,
-                           c.name AS client_name, u.name AS user_name,
-                           s.name AS status, o.client_id, o.user_id, o.status_id
+                    SELECT 
+                        o.id, 
+                        p.name AS product, 
+                        o.product_id, 
+                        o.count, 
+                        o.summa,
+                        o.date_operation, 
+                        o.time_operation,
+                        client.phyo AS client_name, 
+                        us.phyo AS user_name,
+                        s.name AS status, 
+                        o.client_id, 
+                        o.user_id, 
+                        o.status_id
                     FROM operation o
                     JOIN product p ON o.product_id = p.id
-                    JOIN client c ON o.client_id = c.id
-                    JOIN users u ON o.user_id = u.id
+                    LEFT JOIN user_system client ON o.client_id = client.id
+                    LEFT JOIN user_system us ON o.user_id = us.id
                     JOIN status_operation s ON o.status_id = s.id
-                    ORDER BY o.date_operation DESC, o.time_operation DESC";
+                    ORDER BY o.date_operation DESC, o.time_operation DESC;
+                ";
 
                 using (var cmd = new NpgsqlCommand(query, connection))
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
+                        TimeOnly timeOnly = TimeOnly.FromDateTime(reader.GetDateTime(6));
+
                         operations.Add(new OperationView
                         {
                             Id = reader.GetInt32(0),
@@ -46,12 +60,10 @@ namespace KURSACH_NOT_ANIMAL.Model
                             Count = reader.GetInt32(3),
                             Summa = reader.GetDouble(4),
                             Date = DateOnly.FromDateTime(reader.GetDateTime(5)),
-                            Time = TimeOnly.FromTimeSpan(reader.GetTimeSpan(6)),
+                            Time = TimeOnly.FromDateTime(reader.GetDateTime(6)), // исправлено
                             ClientName = reader.GetString(7),
-                            UserName = reader.GetString(8),
                             Status = reader.GetString(9),
                             ClientId = reader.GetInt32(10),
-                            UserId = reader.GetInt32(11),
                             StatusId = reader.GetInt32(12)
                         });
                     }
